@@ -22,8 +22,8 @@ def validar_texto(valor, campo: str, longitud_maxima: int | None = None) -> str:
     return limpio
 
 
-def validar_texto_libre(valor, campo: str) -> str:
-    """Valida un texto descriptivo que puede quedar vacío (solo exige que sea str)."""
+def validar_cadena(valor, campo: str) -> str:
+    """Valida solo que el dato sea texto (str). Se usa donde el caso no impone otra regla."""
     if not isinstance(valor, str):
         raise TypeError(f"{campo}: debe ser texto (str), se recibió {type(valor).__name__}.")
     return valor.strip()

@@ -243,15 +243,9 @@ def probar_plan() -> None:
 def probar_escuela() -> None:
     titulo("ESCUELA PROFESIONAL")
 
-    regla("R17", "El nombre de la escuela se valida (máximo 100, decisión del equipo)")
+    regla("R17", "El nombre de la escuela también se valida")
     aceptado("nombre 'Ingeniería de Sistemas'", lambda: escuela_valida().nombre)
-    rechazado("nombre de 101 caracteres", lambda: escuela_valida(nombre="E" * 101))
-
-    regla("R18", "Director y secretario académico se guardan como código del docente")
-    aceptado("códigos DOC-001 y DOC-002",
-             lambda: (lambda e: f"{e.codigo_director}, {e.codigo_secretario_academico}")(
-                 escuela_valida()))
-    rechazado("código de director vacío", lambda: escuela_valida(codigo_director=""))
+    rechazado("nombre vacío", lambda: escuela_valida(nombre=""))
 
 
 # --------------------------------------------------------------------------- #
@@ -261,11 +255,11 @@ def probar_escuela() -> None:
 def probar_periodo() -> None:
     titulo("PERIODO ACADÉMICO")
 
-    regla("R19", "El nombre del periodo tiene hasta 45 caracteres")
+    regla("R18", "El nombre del periodo tiene hasta 45 caracteres")
     aceptado("nombre de 45 caracteres", lambda: len(periodo_valido(nombre="N" * 45).nombre))
     rechazado("nombre de 46 caracteres", lambda: periodo_valido(nombre="N" * 46))
 
-    regla("R20", "La fecha de fin del periodo no puede ser anterior a la de inicio")
+    regla("R19", "La fecha de fin del periodo no puede ser anterior a la de inicio")
     aceptado("inicio y fin el mismo día (no es anterior)",
              lambda: periodo_valido(fecha_inicio=date(2026, 8, 17),
                                     fecha_fin=date(2026, 8, 17)).fecha_fin)
@@ -273,14 +267,14 @@ def probar_periodo() -> None:
               lambda: periodo_valido(fecha_inicio=date(2026, 12, 18),
                                      fecha_fin=date(2026, 8, 17)))
 
-    regla("R21", "La fecha de fin de matrícula no puede ser anterior a la de inicio")
+    regla("R20", "La fecha de fin de matrícula no puede ser anterior a la de inicio")
     aceptado("matrícula del 3 al 14 de agosto",
              lambda: periodo_valido().fecha_fin_matricula)
     rechazado("matrícula del 14 al 3 de agosto",
               lambda: periodo_valido(fecha_inicio_matricula=date(2026, 8, 14),
                                      fecha_fin_matricula=date(2026, 8, 3)))
 
-    regla("R22", "Las dos fechas de cada intervalo se cambian juntas")
+    regla("R21", "Las dos fechas de cada intervalo se cambian juntas")
     p = periodo_valido(fecha_inicio=date(2026, 3, 23), fecha_fin=date(2026, 7, 24))
     # Con setters separados este cambio fallaría: inicio 17/08 > fin 24/07 a mitad de camino.
     aceptado("mover el periodo de mar-jul a ago-dic con cambiar_fechas()",
@@ -293,19 +287,19 @@ def probar_periodo() -> None:
     aceptado("tras el rechazo el periodo conserva sus fechas",
              lambda: f"{p.fecha_inicio} a {p.fecha_fin}")
 
-    regla("R23", "Es verano: se guarda 0 o 1, se responde verdadero o falso")
+    regla("R22", "Es verano: se guarda 0 o 1, se responde verdadero o falso")
     p = periodo_valido(es_verano=True)
     aceptado("es_verano=True se guarda como 1 y se entrega como bool",
              lambda: f"interno {p._es_verano!r} -> externo {p.es_verano!r}")
     rechazado("es_verano = 'si'", lambda: periodo_valido(es_verano="si"))
 
-    regla("R24", "La nota mínima aprobatoria va de 0 a 20 y puede tener decimales")
+    regla("R23", "La nota mínima aprobatoria va de 0 a 20 y puede tener decimales")
     aceptado("nota = 10.5", lambda: periodo_valido(nota_minima_aprobatoria=10.5)
              .nota_minima_aprobatoria)
     rechazado("nota = 20.5", lambda: periodo_valido(nota_minima_aprobatoria="20.5"))
     rechazado("nota = -1", lambda: periodo_valido(nota_minima_aprobatoria=-1))
 
-    regla("R25", "El estado solo puede ser 1, 2, 3 o 4 (Enum EstadoPeriodo)")
+    regla("R24", "El estado solo puede ser 1, 2, 3 o 4 (Enum EstadoPeriodo)")
     p = periodo_valido()
     aceptado("estado = 2 (número de la base de datos)",
              lambda: (asignar(p, "estado", 2), p.estado)[1])
@@ -321,20 +315,20 @@ def probar_periodo() -> None:
 def probar_personas() -> None:
     titulo("PERSONAS")
 
-    regla("R26", "Nunca se registra a alguien que sea solo persona")
+    regla("R25", "Nunca se registra a alguien que sea solo persona")
     aceptado("crear un Estudiante",
              lambda: type(Estudiante("70123456", "Ana", "Quispe Huamán", "2020100", "IS")).__name__)
     rechazado("Persona('70123456', 'Ana', 'Quispe')",
               lambda: Persona("70123456", "Ana", "Quispe"), TypeError)  # type: ignore[abstract]
 
-    regla("R27", "El nombre completo se calcula a partir de nombres y apellidos")
+    regla("R26", "El nombre completo se calcula a partir de nombres y apellidos")
     d = Docente("40123456", "Luis", "Pérez Rojas", "DOC-001")
     d.nombres = "Luis Alberto"
     aceptado("nombre completo tras corregir los nombres", lambda: d.nombre_completo)
     rechazado("docente.nombre_completo = 'X'", lambda: asignar(d, "nombre_completo", "X"),
               AttributeError)
 
-    regla("R28", "El rol es distinto para un estudiante y para un docente")
+    regla("R27", "El rol es distinto para un estudiante y para un docente")
     aceptado("rol del estudiante",
              lambda: Estudiante("70123456", "Ana", "Quispe", "2020100", "IS").rol)
     aceptado("rol del docente", lambda: Docente("40123456", "Luis", "Pérez", "DOC-001").rol)
@@ -353,7 +347,7 @@ def probar_personas() -> None:
 def probar_abstraccion() -> None:
     titulo("ABSTRACCIÓN Y POLIMORFISMO")
 
-    regla("R29", "RegistroAcademico es abstracto y obliga a implementar su contrato")
+    regla("R28", "RegistroAcademico es abstracto y obliga a implementar su contrato")
     aceptado("Curso implementa longitud_maxima_nombre y resumen()",
              lambda: curso_valido().longitud_maxima_nombre)
     rechazado("RegistroAcademico('X')", lambda: RegistroAcademico("X"), TypeError)
@@ -366,7 +360,7 @@ def probar_abstraccion() -> None:
     rechazado("subclase que no implementa resumen()", lambda: RegistroSinResumen("X"),
               TypeError)
 
-    regla("R30", "Recorrer una lista mixta pidiendo un resumen, sin isinstance")
+    regla("R29", "Recorrer una lista mixta pidiendo un resumen, sin isinstance")
     registros = [curso_valido(), plan_valido(), escuela_valida(), periodo_valido()]
     for registro in registros:
         aceptado(type(registro).__name__, registro.resumen)

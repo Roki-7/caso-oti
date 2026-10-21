@@ -1,6 +1,6 @@
 # Actividad 2: Encapsulamiento
 
-Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@property`. Así cada asignación pasa por un setter que valida, y un dato inválido nunca llega a guardarse. Las validaciones comunes están en `oti/base/validaciones.py`.
+Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@property`. Así cada asignación pasa por un setter que valida, y un dato inválido nunca llega a guardarse. Las validaciones comunes están en `oti/base/validaciones.py`. Solo se validan las reglas que dice el caso; los demás datos (códigos, DNI, nombres, apellidos, años) solo se verifican por tipo.
 
 ## 2.1 Datos protegidos y su regla de validación
 
@@ -17,8 +17,6 @@ Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@
 | PeriodoAcademico | `es_verano` | Solo 0/1 o True/False | «con el mismo 0 o 1 de los planes de estudio» |
 | PeriodoAcademico | `nota_minima_aprobatoria` | De 0 a 20, con decimales | «va de 0 a 20 y puede tener decimales» |
 | PeriodoAcademico | `estado` | Solo 1, 2, 3 o 4 | «ya hemos visto periodos con estado 7» |
-| Escuela | `codigo_director`, `codigo_secretario_academico` | Texto no vacío | «basta con guardar el código del docente» |
-| Todas | códigos, DNI, nombres y apellidos | Texto no vacío | Datos que identifican al registro |
 
 **Decisión técnica:** créditos y nota se guardan como `Decimal` y no como `float`. En `float`, `0.1 + 0.2` da `0.30000000000000004`, y no se puede contar con exactitud cuántos decimales tiene un número, que es justamente lo que pide la regla de créditos.
 

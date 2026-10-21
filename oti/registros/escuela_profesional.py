@@ -1,7 +1,7 @@
 """Escuela profesional."""
 
 from oti.base.registro_academico import RegistroAcademico
-from oti.base.validaciones import validar_texto, validar_texto_libre
+from oti.base.validaciones import validar_cadena
 
 
 class EscuelaProfesional(RegistroAcademico):
@@ -13,11 +13,11 @@ class EscuelaProfesional(RegistroAcademico):
     - «tiene un director y un secretario académico; por ahora basta con guardar el
       código del docente que ocupa cada cargo» -> se guardan códigos (texto), no objetos.
 
-    Decisión del equipo: el caso no da el largo máximo del nombre de la escuela;
-    se fijó en 100 caracteres.
+    El caso exige validar el nombre de la escuela («todos tienen un nombre que debe
+    validarse») pero no indica su tamaño máximo; se asume 100 caracteres.
     """
 
-    LONGITUD_MAXIMA_NOMBRE = 100
+    LONGITUD_MAXIMA_NOMBRE = 100  # valor asumido: el caso no lo indica
 
     def __init__(
         self,
@@ -56,7 +56,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self._codigo = validar_texto(valor, "El código de la escuela")
+        self._codigo = validar_cadena(valor, "El código de la escuela")
 
     @property
     def informacion_general(self) -> str:
@@ -64,7 +64,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @informacion_general.setter
     def informacion_general(self, valor: str) -> None:
-        self._informacion_general = validar_texto_libre(valor, "La información general")
+        self._informacion_general = validar_cadena(valor, "La información general")
 
     @property
     def perfil_egresado(self) -> str:
@@ -72,7 +72,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @perfil_egresado.setter
     def perfil_egresado(self, valor: str) -> None:
-        self._perfil_egresado = validar_texto_libre(valor, "El perfil del egresado")
+        self._perfil_egresado = validar_cadena(valor, "El perfil del egresado")
 
     @property
     def codigo_director(self) -> str:
@@ -80,7 +80,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo_director.setter
     def codigo_director(self, valor: str) -> None:
-        self._codigo_director = validar_texto(valor, "El código del director")
+        self._codigo_director = validar_cadena(valor, "El código del director")
 
     @property
     def codigo_secretario_academico(self) -> str:
@@ -88,6 +88,6 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo_secretario_academico.setter
     def codigo_secretario_academico(self, valor: str) -> None:
-        self._codigo_secretario_academico = validar_texto(
+        self._codigo_secretario_academico = validar_cadena(
             valor, "El código del secretario académico"
         )

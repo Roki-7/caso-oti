@@ -29,6 +29,7 @@ caso-oti/
 ├── pruebas/
 │   └── programa_prueba.py          # Actividad 5: válido aceptado / inválido rechazado
 └── docs/
+    ├── analisis_del_caso.md        # Trazabilidad: frase del caso → elemento
     ├── actividad_1_ficha.md
     ├── actividad_2_encapsulamiento.md
     ├── actividad_3_abstraccion.md
@@ -38,7 +39,8 @@ caso-oti/
     ├── salida_main.txt
     └── uml/
         ├── README.md               # Diagrama UML (GitHub lo muestra)
-        ├── diagrama_clases.drawio  # Diagrama editable en draw.io
+        ├── diagrama_clases.drawio  # Diagrama a colores, editable en draw.io
+        ├── generar_drawio.py       # Genera el .drawio y el .mmd
         ├── diagrama_clases.mmd     # Fuente Mermaid
         ├── diagrama_clases.png
         └── diagrama_clases.svg
@@ -56,7 +58,7 @@ Desde la carpeta raíz del proyecto:
 # Demostración de polimorfismo
 python main.py
 
-# Programa de prueba (Actividad 5): 30 reglas, 72 comprobaciones
+# Programa de prueba (Actividad 5): 29 reglas, 70 comprobaciones
 python -m pruebas.programa_prueba
 ```
 
@@ -64,6 +66,7 @@ python -m pruebas.programa_prueba
 
 | Actividad | Documento |
 |---|---|
+| Análisis del caso (frase → elemento) | [docs/analisis_del_caso.md](docs/analisis_del_caso.md) |
 | 1. Identificación de clases, atributos y métodos | [docs/actividad_1_ficha.md](docs/actividad_1_ficha.md) |
 | 2. Encapsulamiento | [docs/actividad_2_encapsulamiento.md](docs/actividad_2_encapsulamiento.md) |
 | 3. Abstracción | [docs/actividad_3_abstraccion.md](docs/actividad_3_abstraccion.md) |

@@ -84,7 +84,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 |---|---|
 | `_codigo` (str) | `codigo`, `informacion_general`, `perfil_egresado` (get/set) |
 | `_nombre` (str, heredado) | `codigo_director`, `codigo_secretario_academico` (get/set) |
-| `_informacion_general` (str) | `longitud_maxima_nombre` → 100 (decisión del equipo) |
+| `_informacion_general` (str) | `longitud_maxima_nombre` (el caso no da el número; se asume 100) |
 | `_perfil_egresado` (str) | `resumen()` |
 | `_codigo_director` (str) | |
 | `_codigo_secretario_academico` (str) | |

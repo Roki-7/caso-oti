@@ -80,7 +80,7 @@ class PeriodoAcademico(RegistroAcademico):
 
     @numero.setter
     def numero(self, valor: int) -> None:
-        self._numero = validar_entero(valor, "El número del periodo", minimo=0)
+        self._numero = validar_entero(valor, "El número del periodo")
 
     @property
     def anio(self) -> int:
@@ -88,7 +88,7 @@ class PeriodoAcademico(RegistroAcademico):
 
     @anio.setter
     def anio(self, valor: int) -> None:
-        self._anio = validar_entero(valor, "El año del periodo", minimo=1)
+        self._anio = validar_entero(valor, "El año del periodo")
 
     # ---- Fechas: solo lectura, se cambian de a dos ----------------------------
 

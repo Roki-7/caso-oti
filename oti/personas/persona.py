@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-from oti.base.validaciones import validar_texto
+from oti.base.validaciones import validar_cadena
 
 
 class Persona(ABC):
@@ -34,7 +34,7 @@ class Persona(ABC):
 
     @dni.setter
     def dni(self, valor: str) -> None:
-        self._dni = validar_texto(valor, "El DNI")
+        self._dni = validar_cadena(valor, "El DNI")
 
     @property
     def nombres(self) -> str:
@@ -42,7 +42,7 @@ class Persona(ABC):
 
     @nombres.setter
     def nombres(self, valor: str) -> None:
-        self._nombres = validar_texto(valor, "Los nombres")
+        self._nombres = validar_cadena(valor, "Los nombres")
 
     @property
     def apellidos(self) -> str:
@@ -50,7 +50,7 @@ class Persona(ABC):
 
     @apellidos.setter
     def apellidos(self, valor: str) -> None:
-        self._apellidos = validar_texto(valor, "Los apellidos")
+        self._apellidos = validar_cadena(valor, "Los apellidos")
 
     @property
     def nombre_completo(self) -> str:

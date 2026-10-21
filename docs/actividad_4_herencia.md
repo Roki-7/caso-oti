@@ -36,7 +36,7 @@ Todas son asociaciones. Por la restricción del encargo («por ahora se guarda s
 |---|---|---|---|
 | `Curso` | `_nombre`, propiedad `nombre` con su validación | `id`, `codigo`, `creditos`, las 4 horas, `horas_totales` | `longitud_maxima_nombre` (200), `resumen()` |
 | `PlanEstudios` | `_nombre`, propiedad `nombre` | `anio_aprobacion`, los 3 créditos, `creditos_totales`, `vigente`, `es_nuevo` | `longitud_maxima_nombre` (36), `resumen()` |
-| `EscuelaProfesional` | `_nombre`, propiedad `nombre` | `codigo`, `informacion_general`, `perfil_egresado`, `codigo_director`, `codigo_secretario_academico` | `longitud_maxima_nombre` (100), `resumen()` |
+| `EscuelaProfesional` | `_nombre`, propiedad `nombre` | `codigo`, `informacion_general`, `perfil_egresado`, `codigo_director`, `codigo_secretario_academico` | `longitud_maxima_nombre` (valor asumido: 100), `resumen()` |
 | `PeriodoAcademico` | `_nombre`, propiedad `nombre` | `numero`, `anio`, las 4 fechas, `cambiar_fechas()`, `cambiar_fechas_matricula()`, `es_verano`, `nota_minima_aprobatoria`, `estado` | `longitud_maxima_nombre` (45), `resumen()` |
 | `Estudiante` | `dni`, `nombres`, `apellidos`, `nombre_completo`, `__str__()` | `codigo_estudiante`, `codigo_escuela` | `rol` («Estudiante») |
 | `Docente` | `dni`, `nombres`, `apellidos`, `nombre_completo`, `__str__()` | `codigo_docente` | `rol` («Docente») |

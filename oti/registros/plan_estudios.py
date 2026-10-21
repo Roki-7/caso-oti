@@ -66,7 +66,7 @@ class PlanEstudios(RegistroAcademico):
 
     @anio_aprobacion.setter
     def anio_aprobacion(self, valor: int) -> None:
-        self._anio_aprobacion = validar_entero(valor, "El año de aprobación", minimo=1)
+        self._anio_aprobacion = validar_entero(valor, "El año de aprobación")
 
     # ---- Créditos (ninguno negativo) ------------------------------------------
 
