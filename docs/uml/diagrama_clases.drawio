@@ -419,70 +419,40 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="c-129" value="&lt;b&gt;Caso OTI&lt;/b&gt; · Diagrama de clases UML" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;fillColor=#FFE6CC;strokeColor=#33CC33;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="983" y="20" width="340" height="40" as="geometry" />
+          <mxGeometry x="1193" y="20" width="340" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="c-130" value="&lt;b&gt;Restricción del encargo&lt;/b&gt;&lt;br&gt;«Cuando un registro hace referencia a otro (la sección a su curso, la escuela a su director), por ahora se guarda solo el código como texto.»&lt;br&gt;&lt;br&gt;Por eso &lt;i&gt;codigo_curso&lt;/i&gt;, &lt;i&gt;codigo_periodo&lt;/i&gt;, &lt;i&gt;codigo_escuela&lt;/i&gt;, &lt;i&gt;codigo_director&lt;/i&gt; y &lt;i&gt;codigo_secretario_academico&lt;/i&gt; son atributos &lt;b&gt;str&lt;/b&gt; y no asociaciones." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=16;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;verticalAlign=top;spacing=10;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="690" y="964" width="360" height="150" as="geometry" />
+        <mxCell id="c-130" value="&lt;b&gt;Leyenda&lt;/b&gt;" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fillColor=#FFFFFF;strokeColor=#999999;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="964" width="260" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="c-131" value="&lt;b&gt;Leyenda&lt;/b&gt;" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=4;fillColor=#FFFFFF;strokeColor=#999999;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="1100" y="964" width="330" height="352" as="geometry" />
-        </mxCell>
-        <mxCell id="c-132" value="" style="rounded=1;arcSize=10;fillColor=#DAE8FC;strokeColor=#6C8EBF;strokeWidth=1.5;" vertex="1" parent="1">
+        <mxCell id="c-131" value="" style="rounded=1;arcSize=10;fillColor=#DAE8FC;strokeColor=#6C8EBF;strokeWidth=1.5;" vertex="1" parent="1">
           <mxGeometry x="1112" y="999" width="26" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="c-133" value="Clase abstracta (no se instancia)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1146" y="996" width="274" height="22" as="geometry" />
+        <mxCell id="c-132" value="Clase abstracta (no se instancia)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="996" width="204" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="c-134" value="" style="rounded=1;arcSize=10;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=1.5;" vertex="1" parent="1">
+        <mxCell id="c-133" value="" style="rounded=1;arcSize=10;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=1.5;" vertex="1" parent="1">
           <mxGeometry x="1112" y="1023" width="26" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="c-135" value="Subclase de RegistroAcademico" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1146" y="1020" width="274" height="22" as="geometry" />
+        <mxCell id="c-134" value="Subclase de RegistroAcademico" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="1020" width="204" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="c-136" value="" style="rounded=1;arcSize=10;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;" vertex="1" parent="1">
+        <mxCell id="c-135" value="" style="rounded=1;arcSize=10;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;" vertex="1" parent="1">
           <mxGeometry x="1112" y="1047" width="26" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="c-137" value="Subclase de Persona" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1146" y="1044" width="274" height="22" as="geometry" />
+        <mxCell id="c-136" value="Subclase de Persona" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="1044" width="204" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="c-138" value="" style="rounded=1;arcSize=10;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;" vertex="1" parent="1">
+        <mxCell id="c-137" value="" style="rounded=1;arcSize=10;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;" vertex="1" parent="1">
           <mxGeometry x="1112" y="1071" width="26" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="c-139" value="Clase sin herencia" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1146" y="1068" width="274" height="22" as="geometry" />
+        <mxCell id="c-138" value="Clase sin herencia" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="1068" width="204" height="22" as="geometry" />
         </mxCell>
-        <mxCell id="c-140" value="" style="rounded=1;arcSize=10;fillColor=#E1D5E7;strokeColor=#9673A6;strokeWidth=1.5;" vertex="1" parent="1">
+        <mxCell id="c-139" value="" style="rounded=1;arcSize=10;fillColor=#E1D5E7;strokeColor=#9673A6;strokeWidth=1.5;" vertex="1" parent="1">
           <mxGeometry x="1112" y="1095" width="26" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="c-141" value="Enumeración" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1146" y="1092" width="274" height="22" as="geometry" />
-        </mxCell>
-        <mxCell id="c-142" value="&lt;b&gt;-&lt;/b&gt; privado (prefijo __ en Python) &amp;nbsp; &lt;b&gt;+&lt;/b&gt; público" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1124" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-143" value="«property» propiedad (@property)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1144" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-144" value="{readOnly} propiedad sin setter" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1164" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-145" value="&lt;b&gt;/&lt;/b&gt;nombre atributo calculado (no se guarda)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1184" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-146" value="{ … } restricción indicada en el caso" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1204" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-147" value="Fondo tenue: compartimento de propiedades" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1224" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-148" value="&lt;font color='#B85450'&gt;&lt;i&gt;Rojo en cursiva&lt;/i&gt;&lt;/font&gt;: miembro abstracto" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1244" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-149" value="Triángulo hueco: herencia («es un»)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1264" width="310" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="c-150" value="Flecha abierta: asociación (rol y multiplicidad)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="1112" y="1284" width="310" height="20" as="geometry" />
+        <mxCell id="c-140" value="Enumeración" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="1092" width="204" height="22" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -309,24 +309,12 @@ ANCHO_TOTAL = POS["Docente"][0] + W["Docente"]
 celda("<b>Caso OTI</b> · Diagrama de clases UML",
       "text;html=1;align=center;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;"
       "fillColor=#FFE6CC;strokeColor=#33CC33;strokeWidth=2;",
-      ANCHO_TOTAL / 2 - 170, 20, 340, 40)
-
-# ---- Nota con la restricción del encargo --------------------------------------
-x_nota = POS["EstadoPeriodo"][0] + W["EstadoPeriodo"] + 50
-y_nota = Y_BAJO
-nota = ("<b>Restricción del encargo</b><br>«Cuando un registro hace referencia a otro "
-        "(la sección a su curso, la escuela a su director), por ahora se guarda solo el "
-        "código como texto.»<br><br>Por eso <i>codigo_curso</i>, <i>codigo_periodo</i>, "
-        "<i>codigo_escuela</i>, <i>codigo_director</i> y <i>codigo_secretario_academico</i> "
-        "son atributos <b>str</b> y no asociaciones.")
-celda(nota, "shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=16;fillColor=#FFF2CC;"
-            "strokeColor=#D6B656;align=left;verticalAlign=top;spacing=10;fontSize=11;",
-      x_nota, y_nota, 360, 150)
+      ANCHO_TOTAL / 2 + 40, 20, 340, 40)  # posición que se le dio en draw.io
 
 # ---- Leyenda -----------------------------------------------------------------
-x_ley = x_nota + 360 + 50
+x_ley = POS["EstadoPeriodo"][0] + W["EstadoPeriodo"] + 460
 y_ley = Y_BAJO
-ANCHO_LEY = 330
+ANCHO_LEY = 260
 filas_color = [
     ("abstracta", "Clase abstracta (no se instancia)"),
     ("registro", "Subclase de RegistroAcademico"),
@@ -334,18 +322,7 @@ filas_color = [
     ("independiente", "Clase sin herencia"),
     ("enumeracion", "Enumeración"),
 ]
-filas_texto = [
-    "<b>-</b> privado (prefijo __ en Python) &nbsp; <b>+</b> público",
-    "«property» propiedad (@property)",
-    "{readOnly} propiedad sin setter",
-    "<b>/</b>nombre atributo calculado (no se guarda)",
-    "{ … } restricción indicada en el caso",
-    "Fondo tenue: compartimento de propiedades",
-    f"<font color='{ROJO}'><i>Rojo en cursiva</i></font>: miembro abstracto",
-    "Triángulo hueco: herencia («es un»)",
-    "Flecha abierta: asociación (rol y multiplicidad)",
-]
-alto_ley = 34 + len(filas_color) * 24 + 8 + len(filas_texto) * 20 + 10
+alto_ley = 34 + len(filas_color) * 24 + 26
 celda("<b>Leyenda</b>", "rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;"
       "spacingLeft=10;spacingTop=4;fillColor=#FFFFFF;strokeColor=#999999;fontSize=12;",
       x_ley, y_ley, ANCHO_LEY, alto_ley)
@@ -357,11 +334,6 @@ for grupo, texto in filas_color:
     celda(texto, "text;html=1;align=left;verticalAlign=middle;fontSize=11;",
           x_ley + 46, yy, ANCHO_LEY - 56, 22)
     yy += 24
-yy += 8
-for texto in filas_texto:
-    celda(texto, "text;html=1;align=left;verticalAlign=middle;fontSize=11;",
-          x_ley + 12, yy, ANCHO_LEY - 20, 20)
-    yy += 20
 
 ET.indent(mxfile, space="  ")
 aqui = Path(__file__).parent
@@ -370,7 +342,6 @@ ET.ElementTree(mxfile).write(aqui / "diagrama_clases.drawio", encoding="utf-8",
 
 # ---- Comprobación de solapamientos -------------------------------------------
 cajas = {n: (POS[n][0], POS[n][1], W[n], H[n]) for n in CLASES}
-cajas["nota"] = (x_nota, y_nota, 360, 150)
 cajas["leyenda"] = (x_ley, y_ley, ANCHO_LEY, alto_ley)
 nombres = list(cajas)
 for i, a in enumerate(nombres):

@@ -40,9 +40,10 @@ caso-oti/
     └── uml/
         ├── README.md               # Diagrama UML (GitHub lo muestra)
         ├── diagrama_clases.drawio  # Diagrama a colores, editable en draw.io
+        ├── diagrama_clases_drawio.png  # Imagen del diagrama exportada de draw.io
         ├── generar_drawio.py       # Genera el .drawio y el .mmd
         ├── diagrama_clases.mmd     # Fuente Mermaid
-        ├── diagrama_clases.png
+        ├── diagrama_clases.png     # Versión Mermaid
         └── diagrama_clases.svg
 ```
 
@@ -76,7 +77,9 @@ python -m pruebas.programa_prueba
 
 ## Diagrama de clases
 
-![Diagrama de clases UML](docs/uml/diagrama_clases.png)
+![Diagrama de clases UML](docs/uml/diagrama_clases_drawio.png)
+
+El archivo editable está en [`docs/uml/diagrama_clases.drawio`](docs/uml/diagrama_clases.drawio) (se abre en [app.diagrams.net](https://app.diagrams.net)). La notación y los colores se explican en [`docs/uml/README.md`](docs/uml/README.md).
 
 ## Ejemplo de uso
 

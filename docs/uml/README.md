@@ -1,6 +1,6 @@
 # Diagrama de clases UML
 
-![Diagrama de clases](diagrama_clases.png)
+![Diagrama de clases](diagrama_clases_drawio.png)
 
 ## Archivo editable
 
@@ -34,7 +34,7 @@ Cada clase tiene tres compartimentos: **atributos privados**, **propiedades** (f
 
 Por la restricción del encargo («por ahora se guarda solo el código como texto»), las referencias entre registros son atributos `str` y no se dibujan como asociaciones.
 
-## Código fuente del diagrama (GitHub lo dibuja automáticamente)
+## Versión Mermaid (GitHub la dibuja automáticamente)
 
 ```mermaid
 classDiagram
