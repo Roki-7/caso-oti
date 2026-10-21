@@ -26,16 +26,16 @@ class Estudiante(Persona):
 
     @property
     def codigo_estudiante(self) -> str:
-        return self._codigo_estudiante
+        return self.__codigo_estudiante
 
     @codigo_estudiante.setter
     def codigo_estudiante(self, valor: str) -> None:
-        self._codigo_estudiante = validar_cadena(valor, "El código de estudiante")
+        self.__codigo_estudiante = validar_cadena(valor, "El código de estudiante")
 
     @property
     def codigo_escuela(self) -> str:
-        return self._codigo_escuela
+        return self.__codigo_escuela
 
     @codigo_escuela.setter
     def codigo_escuela(self, valor: str) -> None:
-        self._codigo_escuela = validar_cadena(valor, "El código de la escuela")
+        self.__codigo_escuela = validar_cadena(valor, "El código de la escuela")

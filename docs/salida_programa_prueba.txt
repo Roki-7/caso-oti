@@ -188,7 +188,7 @@ R28. RegistroAcademico es abstracto y obliga a implementar su contrato
 
 R29. Recorrer una lista mixta pidiendo un resumen, sin isinstance
    [ACEPTADO]  Curso -> [Curso #10] IS-282 - Programación Orientada a Objetos | 4 créditos | 6 h totales (T:2 P:4 S:0 V:0)
-   [ACEPTADO]  PlanEstudios -> [Plan de estudios] Plan 2018 (2018) | 220 créditos (Oblig:180 Elect:30 Extra:10) | vigente
+   [ACEPTADO]  PlanEstudios -> [Plan de estudios] Plan 2018 (2018) - escuela IS | 220 créditos (Oblig:180 Elect:30 Extra:10) | vigente
    [ACEPTADO]  EscuelaProfesional -> [Escuela profesional] IS - Ingeniería de Sistemas | director: DOC-001 | secretario académico: DOC-002
    [ACEPTADO]  PeriodoAcademico -> [Periodo académico] 2026-II - Segundo semestre académico 2026 | 2026-08-17 a 2026-12-18 | matrícula 2026-08-03 a 2026-08-14 | nota mínima 10.5 | estado PLANIFICADO
 

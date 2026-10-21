@@ -31,6 +31,7 @@ def crear_registros() -> list:
     plan = PlanEstudios(
         nombre="Plan de estudios 2018",
         anio_aprobacion=2018,
+        codigo_escuela="IS",
         creditos_obligatorios=180,
         creditos_electivos=30,
         creditos_extracurriculares=10,

@@ -52,42 +52,42 @@ class EscuelaProfesional(RegistroAcademico):
 
     @property
     def codigo(self) -> str:
-        return self._codigo
+        return self.__codigo
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self._codigo = validar_cadena(valor, "El código de la escuela")
+        self.__codigo = validar_cadena(valor, "El código de la escuela")
 
     @property
     def informacion_general(self) -> str:
-        return self._informacion_general
+        return self.__informacion_general
 
     @informacion_general.setter
     def informacion_general(self, valor: str) -> None:
-        self._informacion_general = validar_cadena(valor, "La información general")
+        self.__informacion_general = validar_cadena(valor, "La información general")
 
     @property
     def perfil_egresado(self) -> str:
-        return self._perfil_egresado
+        return self.__perfil_egresado
 
     @perfil_egresado.setter
     def perfil_egresado(self, valor: str) -> None:
-        self._perfil_egresado = validar_cadena(valor, "El perfil del egresado")
+        self.__perfil_egresado = validar_cadena(valor, "El perfil del egresado")
 
     @property
     def codigo_director(self) -> str:
-        return self._codigo_director
+        return self.__codigo_director
 
     @codigo_director.setter
     def codigo_director(self, valor: str) -> None:
-        self._codigo_director = validar_cadena(valor, "El código del director")
+        self.__codigo_director = validar_cadena(valor, "El código del director")
 
     @property
     def codigo_secretario_academico(self) -> str:
-        return self._codigo_secretario_academico
+        return self.__codigo_secretario_academico
 
     @codigo_secretario_academico.setter
     def codigo_secretario_academico(self, valor: str) -> None:
-        self._codigo_secretario_academico = validar_cadena(
+        self.__codigo_secretario_academico = validar_cadena(
             valor, "El código del secretario académico"
         )

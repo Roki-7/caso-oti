@@ -22,7 +22,7 @@ Cada clase tiene tres compartimentos: **atributos privados**, **propiedades** (f
 
 | Símbolo | Significado |
 |---|---|
-| `-` | Atributo privado (en Python, prefijo `_`) |
+| `-` | Atributo privado (en Python, prefijo `__`) |
 | `+` | Miembro público |
 | `«property»` | Propiedad (`@property`) |
 | `{readOnly}` | Propiedad sin setter |
@@ -30,6 +30,7 @@ Cada clase tiene tres compartimentos: **atributos privados**, **propiedades** (f
 | `{ … }` | Restricción indicada en el caso (por ejemplo `{0..255}`) |
 | rojo en cursiva / `{abstract}` | Miembro abstracto (`@abstractmethod`) |
 | triángulo hueco | Herencia («es un») |
+| flecha abierta | Asociación, con rol (`- __estado`) y multiplicidad (`1`) |
 
 Por la restricción del encargo («por ahora se guarda solo el código como texto»), las referencias entre registros son atributos `str` y no se dibujan como asociaciones.
 
@@ -41,20 +42,20 @@ classDiagram
 
     class RegistroAcademico {
         <<abstract>>
-        -_nombre : str [no vacío, máx. longitud_maxima_nombre]
+        -#95;#95;nombre : str [no vacío, máx. longitud_maxima_nombre]
         +nombre : str «property»
         +longitud_maxima_nombre : int «property» [abstract]
         +resumen()* str
     }
 
     class Curso {
-        -_id : int
-        -_codigo : str
-        -_creditos : Decimal [> 0, máx. 2 decimales]
-        -_horas_teoricas : int [0..255]
-        -_horas_practicas : int [0..255]
-        -_horas_seminario : int [0..255]
-        -_horas_virtuales : int [0..255]
+        -#95;#95;id : int
+        -#95;#95;codigo : str
+        -#95;#95;creditos : Decimal [> 0, máx. 2 decimales]
+        -#95;#95;horas_teoricas : int [0..255]
+        -#95;#95;horas_practicas : int [0..255]
+        -#95;#95;horas_seminario : int [0..255]
+        -#95;#95;horas_virtuales : int [0..255]
         +id : int «property» [readOnly]
         +codigo : str «property»
         +creditos : Decimal «property»
@@ -68,15 +69,14 @@ classDiagram
     }
 
     class PeriodoAcademico {
-        -_numero : int
-        -_anio : int
-        -_fecha_inicio : date
-        -_fecha_fin : date [≥ fecha_inicio]
-        -_fecha_inicio_matricula : date
-        -_fecha_fin_matricula : date [≥ fecha_inicio_matricula]
-        -_es_verano : int [0 o 1]
-        -_nota_minima_aprobatoria : Decimal [0..20]
-        -_estado : EstadoPeriodo
+        -#95;#95;numero : int
+        -#95;#95;anio : int
+        -#95;#95;fecha_inicio : date
+        -#95;#95;fecha_fin : date [≥ fecha_inicio]
+        -#95;#95;fecha_inicio_matricula : date
+        -#95;#95;fecha_fin_matricula : date [≥ fecha_inicio_matricula]
+        -#95;#95;es_verano : int [0 o 1]
+        -#95;#95;nota_minima_aprobatoria : Decimal [0..20]
         +numero : int «property»
         +anio : int «property»
         +fecha_inicio : date «property» [readOnly]
@@ -93,13 +93,15 @@ classDiagram
     }
 
     class PlanEstudios {
-        -_anio_aprobacion : int
-        -_creditos_obligatorios : Decimal [≥ 0]
-        -_creditos_electivos : Decimal [≥ 0]
-        -_creditos_extracurriculares : Decimal [≥ 0]
-        -_vigente : int [0 o 1]
-        -_es_nuevo : int [0 o 1]
+        -#95;#95;anio_aprobacion : int
+        -#95;#95;codigo_escuela : str
+        -#95;#95;creditos_obligatorios : Decimal [≥ 0]
+        -#95;#95;creditos_electivos : Decimal [≥ 0]
+        -#95;#95;creditos_extracurriculares : Decimal [≥ 0]
+        -#95;#95;vigente : int [0 o 1]
+        -#95;#95;es_nuevo : int [0 o 1]
         +anio_aprobacion : int «property»
+        +codigo_escuela : str «property»
         +creditos_obligatorios : Decimal «property»
         +creditos_electivos : Decimal «property»
         +creditos_extracurriculares : Decimal «property»
@@ -111,25 +113,25 @@ classDiagram
     }
 
     class EscuelaProfesional {
-        -_codigo : str
-        -_informacion_general : str
-        -_perfil_egresado : str
-        -_codigo_director : str
-        -_codigo_secretario_academico : str
+        -#95;#95;codigo : str
+        -#95;#95;informacion_general : str
+        -#95;#95;perfil_egresado : str
+        -#95;#95;codigo_director : str
+        -#95;#95;codigo_secretario_academico : str
         +codigo : str «property»
         +informacion_general : str «property»
         +perfil_egresado : str «property»
         +codigo_director : str «property»
         +codigo_secretario_academico : str «property»
-        +longitud_maxima_nombre : int «property»
+        +longitud_maxima_nombre : int «property» [= 100, asumido]
         +resumen() str
     }
 
     class Persona {
         <<abstract>>
-        -_dni : str
-        -_nombres : str
-        -_apellidos : str
+        -#95;#95;dni : str
+        -#95;#95;nombres : str
+        -#95;#95;apellidos : str
         +dni : str «property»
         +nombres : str «property»
         +apellidos : str «property»
@@ -139,25 +141,25 @@ classDiagram
     }
 
     class Estudiante {
-        -_codigo_estudiante : str
-        -_codigo_escuela : str
+        -#95;#95;codigo_estudiante : str
+        -#95;#95;codigo_escuela : str
         +codigo_estudiante : str «property»
         +codigo_escuela : str «property»
         +rol : str «property» [= "Estudiante"]
     }
 
     class Docente {
-        -_codigo_docente : str
+        -#95;#95;codigo_docente : str
         +codigo_docente : str «property»
         +rol : str «property» [= "Docente"]
     }
 
     class Seccion {
-        -_codigo : str
-        -_codigo_curso : str
-        -_codigo_periodo : str
-        -_vacantes : int [> 0, ≥ matriculados]
-        -_matriculados : int [≤ vacantes]
+        -#95;#95;codigo : str
+        -#95;#95;codigo_curso : str
+        -#95;#95;codigo_periodo : str
+        -#95;#95;vacantes : int [> 0, ≥ matriculados]
+        -#95;#95;matriculados : int [≥ 0, ≤ vacantes]
         +codigo : str «property»
         +codigo_curso : str «property»
         +codigo_periodo : str «property»
@@ -182,7 +184,7 @@ classDiagram
     RegistroAcademico <|-- EscuelaProfesional
     Persona <|-- Estudiante
     Persona <|-- Docente
-    PeriodoAcademico --> "1" EstadoPeriodo : estado
+    PeriodoAcademico --> "1" EstadoPeriodo : -#95;#95;estado
 
     style RegistroAcademico fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px
     style Curso fill:#D5E8D4,stroke:#82B366,stroke-width:2px

@@ -77,7 +77,7 @@ def curso_valido(**cambios) -> Curso:
 
 
 def plan_valido(**cambios) -> PlanEstudios:
-    datos = dict(nombre="Plan 2018", anio_aprobacion=2018,
+    datos = dict(nombre="Plan 2018", anio_aprobacion=2018, codigo_escuela="IS",
                  creditos_obligatorios=180, creditos_electivos=30,
                  creditos_extracurriculares=10, vigente=1, es_nuevo=0)
     datos.update(cambios)
@@ -231,7 +231,7 @@ def probar_plan() -> None:
     regla("R16", "Vigente / es nuevo: se guarda 0 o 1, se responde verdadero o falso")
     p = plan_valido(vigente=1, es_nuevo=False)
     aceptado("vigente=1 se guarda como int y se entrega como bool",
-             lambda: f"interno {p._vigente!r} ({type(p._vigente).__name__}) -> "
+             lambda: f"interno {p._PlanEstudios__vigente!r} ({type(p._PlanEstudios__vigente).__name__}) -> "
                      f"externo {p.vigente!r} ({type(p.vigente).__name__})")
     rechazado("vigente = 2", lambda: plan_valido(vigente=2))
 
@@ -290,7 +290,7 @@ def probar_periodo() -> None:
     regla("R22", "Es verano: se guarda 0 o 1, se responde verdadero o falso")
     p = periodo_valido(es_verano=True)
     aceptado("es_verano=True se guarda como 1 y se entrega como bool",
-             lambda: f"interno {p._es_verano!r} -> externo {p.es_verano!r}")
+             lambda: f"interno {p._PeriodoAcademico__es_verano!r} -> externo {p.es_verano!r}")
     rechazado("es_verano = 'si'", lambda: periodo_valido(es_verano="si"))
 
     regla("R23", "La nota mínima aprobatoria va de 0 a 20 y puede tener decimales")

@@ -34,19 +34,19 @@ PALETA = {
 A = True
 CLASES = {
     "RegistroAcademico": dict(grupo="abstracta", estereotipo="abstract",
-        privados=[("- _nombre: str {no vacío, máx. longitud_maxima_nombre}", 0)],
+        privados=[("- __nombre: str {no vacío, máx. longitud_maxima_nombre}", 0)],
         propiedades=[("+ nombre: str «property»", 0),
                      ("+ longitud_maxima_nombre: int «property» {abstract}", A)],
         metodos=[("+ resumen(): str {abstract}", A)]),
 
     "Curso": dict(grupo="registro",
-        privados=[("- _id: int", 0),
-                  ("- _codigo: str", 0),
-                  ("- _creditos: Decimal {> 0, máx. 2 decimales}", 0),
-                  ("- _horas_teoricas: int {0..255}", 0),
-                  ("- _horas_practicas: int {0..255}", 0),
-                  ("- _horas_seminario: int {0..255}", 0),
-                  ("- _horas_virtuales: int {0..255}", 0)],
+        privados=[("- __id: int", 0),
+                  ("- __codigo: str", 0),
+                  ("- __creditos: Decimal {> 0, máx. 2 decimales}", 0),
+                  ("- __horas_teoricas: int {0..255}", 0),
+                  ("- __horas_practicas: int {0..255}", 0),
+                  ("- __horas_seminario: int {0..255}", 0),
+                  ("- __horas_virtuales: int {0..255}", 0)],
         propiedades=[("+ id: int «property» {readOnly}", 0),
                      ("+ codigo: str «property»", 0),
                      ("+ creditos: Decimal «property»", 0),
@@ -59,15 +59,14 @@ CLASES = {
         metodos=[("+ resumen(): str", 0)]),
 
     "PeriodoAcademico": dict(grupo="registro",
-        privados=[("- _numero: int", 0),
-                  ("- _anio: int", 0),
-                  ("- _fecha_inicio: date", 0),
-                  ("- _fecha_fin: date {≥ fecha_inicio}", 0),
-                  ("- _fecha_inicio_matricula: date", 0),
-                  ("- _fecha_fin_matricula: date {≥ fecha_inicio_matricula}", 0),
-                  ("- _es_verano: int {0 o 1}", 0),
-                  ("- _nota_minima_aprobatoria: Decimal {0..20}", 0),
-                  ("- _estado: EstadoPeriodo", 0)],
+        privados=[("- __numero: int", 0),
+                  ("- __anio: int", 0),
+                  ("- __fecha_inicio: date", 0),
+                  ("- __fecha_fin: date {≥ fecha_inicio}", 0),
+                  ("- __fecha_inicio_matricula: date", 0),
+                  ("- __fecha_fin_matricula: date {≥ fecha_inicio_matricula}", 0),
+                  ("- __es_verano: int {0 o 1}", 0),
+                  ("- __nota_minima_aprobatoria: Decimal {0..20}", 0)],
         propiedades=[("+ numero: int «property»", 0),
                      ("+ anio: int «property»", 0),
                      ("+ fecha_inicio: date «property» {readOnly}", 0),
@@ -83,13 +82,15 @@ CLASES = {
                  ("+ resumen(): str", 0)]),
 
     "PlanEstudios": dict(grupo="registro",
-        privados=[("- _anio_aprobacion: int", 0),
-                  ("- _creditos_obligatorios: Decimal {≥ 0}", 0),
-                  ("- _creditos_electivos: Decimal {≥ 0}", 0),
-                  ("- _creditos_extracurriculares: Decimal {≥ 0}", 0),
-                  ("- _vigente: int {0 o 1}", 0),
-                  ("- _es_nuevo: int {0 o 1}", 0)],
+        privados=[("- __anio_aprobacion: int", 0),
+                  ("- __codigo_escuela: str", 0),
+                  ("- __creditos_obligatorios: Decimal {≥ 0}", 0),
+                  ("- __creditos_electivos: Decimal {≥ 0}", 0),
+                  ("- __creditos_extracurriculares: Decimal {≥ 0}", 0),
+                  ("- __vigente: int {0 o 1}", 0),
+                  ("- __es_nuevo: int {0 o 1}", 0)],
         propiedades=[("+ anio_aprobacion: int «property»", 0),
+                     ("+ codigo_escuela: str «property»", 0),
                      ("+ creditos_obligatorios: Decimal «property»", 0),
                      ("+ creditos_electivos: Decimal «property»", 0),
                      ("+ creditos_extracurriculares: Decimal «property»", 0),
@@ -100,23 +101,23 @@ CLASES = {
         metodos=[("+ resumen(): str", 0)]),
 
     "EscuelaProfesional": dict(grupo="registro",
-        privados=[("- _codigo: str", 0),
-                  ("- _informacion_general: str", 0),
-                  ("- _perfil_egresado: str", 0),
-                  ("- _codigo_director: str", 0),
-                  ("- _codigo_secretario_academico: str", 0)],
+        privados=[("- __codigo: str", 0),
+                  ("- __informacion_general: str", 0),
+                  ("- __perfil_egresado: str", 0),
+                  ("- __codigo_director: str", 0),
+                  ("- __codigo_secretario_academico: str", 0)],
         propiedades=[("+ codigo: str «property»", 0),
                      ("+ informacion_general: str «property»", 0),
                      ("+ perfil_egresado: str «property»", 0),
                      ("+ codigo_director: str «property»", 0),
                      ("+ codigo_secretario_academico: str «property»", 0),
-                     ("+ longitud_maxima_nombre: int «property»", 0)],
+                     ("+ longitud_maxima_nombre: int «property» {= 100, asumido}", 0)],
         metodos=[("+ resumen(): str", 0)]),
 
     "Persona": dict(grupo="abstracta", estereotipo="abstract",
-        privados=[("- _dni: str", 0),
-                  ("- _nombres: str", 0),
-                  ("- _apellidos: str", 0)],
+        privados=[("- __dni: str", 0),
+                  ("- __nombres: str", 0),
+                  ("- __apellidos: str", 0)],
         propiedades=[("+ dni: str «property»", 0),
                      ("+ nombres: str «property»", 0),
                      ("+ apellidos: str «property»", 0),
@@ -125,25 +126,25 @@ CLASES = {
         metodos=[("+ __str__(): str", 0)]),
 
     "Estudiante": dict(grupo="persona",
-        privados=[("- _codigo_estudiante: str", 0),
-                  ("- _codigo_escuela: str", 0)],
+        privados=[("- __codigo_estudiante: str", 0),
+                  ("- __codigo_escuela: str", 0)],
         propiedades=[("+ codigo_estudiante: str «property»", 0),
                      ("+ codigo_escuela: str «property»", 0),
                      ("+ rol: str «property» {= \"Estudiante\"}", 0)],
         metodos=[]),
 
     "Docente": dict(grupo="persona",
-        privados=[("- _codigo_docente: str", 0)],
+        privados=[("- __codigo_docente: str", 0)],
         propiedades=[("+ codigo_docente: str «property»", 0),
                      ("+ rol: str «property» {= \"Docente\"}", 0)],
         metodos=[]),
 
     "Seccion": dict(grupo="independiente",
-        privados=[("- _codigo: str", 0),
-                  ("- _codigo_curso: str", 0),
-                  ("- _codigo_periodo: str", 0),
-                  ("- _vacantes: int {> 0, ≥ matriculados}", 0),
-                  ("- _matriculados: int {≤ vacantes}", 0)],
+        privados=[("- __codigo: str", 0),
+                  ("- __codigo_curso: str", 0),
+                  ("- __codigo_periodo: str", 0),
+                  ("- __vacantes: int {> 0, ≥ matriculados}", 0),
+                  ("- __matriculados: int {≥ 0, ≤ vacantes}", 0)],
         propiedades=[("+ codigo: str «property»", 0),
                      ("+ codigo_curso: str «property»", 0),
                      ("+ codigo_periodo: str «property»", 0),
@@ -301,12 +302,14 @@ for hijo in ["Estudiante", "Docente"]:
 arista("PeriodoAcademico", "EstadoPeriodo",
        "endArrow=open;endSize=12;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;fontSize=11;"
        f"strokeColor={PALETA['enumeracion'][1]};strokeWidth=1.5;fontColor={PALETA['enumeracion'][1]};"
-       "labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;entryX=0.5;entryY=0;", "estado  1")
+       "labelBackgroundColor=#FFFFFF;exitX=0.3;exitY=1;entryX=0.5;entryY=0;", "- __estado&nbsp;&nbsp;1")
 
 # ---- Título ------------------------------------------------------------------
+ANCHO_TOTAL = POS["Docente"][0] + W["Docente"]
 celda("<b>Caso OTI</b> · Diagrama de clases UML",
-      "text;html=1;align=left;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;",
-      40, 25, 600, 40)
+      "text;html=1;align=center;verticalAlign=middle;fontSize=20;fontColor=#1A1A1A;"
+      "fillColor=#FFE6CC;strokeColor=#33CC33;strokeWidth=2;",
+      ANCHO_TOTAL / 2 - 170, 20, 340, 40)
 
 # ---- Nota con la restricción del encargo --------------------------------------
 x_nota = POS["EstadoPeriodo"][0] + W["EstadoPeriodo"] + 50
@@ -332,7 +335,7 @@ filas_color = [
     ("enumeracion", "Enumeración"),
 ]
 filas_texto = [
-    "<b>-</b> atributo privado &nbsp;&nbsp; <b>+</b> público",
+    "<b>-</b> privado (prefijo __ en Python) &nbsp; <b>+</b> público",
     "«property» propiedad (@property)",
     "{readOnly} propiedad sin setter",
     "<b>/</b>nombre atributo calculado (no se guarda)",
@@ -340,6 +343,7 @@ filas_texto = [
     "Fondo tenue: compartimento de propiedades",
     f"<font color='{ROJO}'><i>Rojo en cursiva</i></font>: miembro abstracto",
     "Triángulo hueco: herencia («es un»)",
+    "Flecha abierta: asociación (rol y multiplicidad)",
 ]
 alto_ley = 34 + len(filas_color) * 24 + 8 + len(filas_texto) * 20 + 10
 celda("<b>Leyenda</b>", "rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;"
@@ -385,6 +389,7 @@ for nombre, c in CLASES.items():
     for comp in (c["privados"], c["propiedades"] or []):
         for t, abstracto in comp:
             t = t.replace("- ", "-", 1).replace("+ ", "+", 1)
+            t = t.replace("__", "#95;#95;")
             t = t.replace("{", "[").replace("}", "]").replace(": ", " : ", 1)
             L.append(f"        {t}")
     for t, abstracto in (c["metodos"] or []):
@@ -395,7 +400,7 @@ for nombre, c in CLASES.items():
 for h in FILA_REG:
     L.append(f"    RegistroAcademico <|-- {h}")
 L += ["    Persona <|-- Estudiante", "    Persona <|-- Docente",
-      "    PeriodoAcademico --> \"1\" EstadoPeriodo : estado", ""]
+      "    PeriodoAcademico --> \"1\" EstadoPeriodo : -#95;#95;estado", ""]
 for nombre, c in CLASES.items():
     cabecera, borde, _ = PALETA[c["grupo"]]
     L.append(f"    style {nombre} fill:{cabecera},stroke:{borde},stroke-width:2px")

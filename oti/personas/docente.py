@@ -17,8 +17,8 @@ class Docente(Persona):
 
     @property
     def codigo_docente(self) -> str:
-        return self._codigo_docente
+        return self.__codigo_docente
 
     @codigo_docente.setter
     def codigo_docente(self, valor: str) -> None:
-        self._codigo_docente = validar_cadena(valor, "El código de docente")
+        self.__codigo_docente = validar_cadena(valor, "El código de docente")

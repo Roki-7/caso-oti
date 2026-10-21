@@ -76,37 +76,37 @@ class PeriodoAcademico(RegistroAcademico):
 
     @property
     def numero(self) -> int:
-        return self._numero
+        return self.__numero
 
     @numero.setter
     def numero(self, valor: int) -> None:
-        self._numero = validar_entero(valor, "El número del periodo")
+        self.__numero = validar_entero(valor, "El número del periodo")
 
     @property
     def anio(self) -> int:
-        return self._anio
+        return self.__anio
 
     @anio.setter
     def anio(self, valor: int) -> None:
-        self._anio = validar_entero(valor, "El año del periodo")
+        self.__anio = validar_entero(valor, "El año del periodo")
 
     # ---- Fechas: solo lectura, se cambian de a dos ----------------------------
 
     @property
     def fecha_inicio(self) -> date:
-        return self._fecha_inicio
+        return self.__fecha_inicio
 
     @property
     def fecha_fin(self) -> date:
-        return self._fecha_fin
+        return self.__fecha_fin
 
     @property
     def fecha_inicio_matricula(self) -> date:
-        return self._fecha_inicio_matricula
+        return self.__fecha_inicio_matricula
 
     @property
     def fecha_fin_matricula(self) -> date:
-        return self._fecha_fin_matricula
+        return self.__fecha_fin_matricula
 
     def cambiar_fechas(self, inicio: date, fin: date) -> None:
         """Cambia juntas las fechas del periodo, validando que fin >= inicio."""
@@ -114,36 +114,36 @@ class PeriodoAcademico(RegistroAcademico):
         fin = validar_fecha(fin, "La fecha de fin del periodo")
         validar_intervalo(inicio, fin, "periodo")
         # Se asignan solo después de validar ambas: el objeto nunca queda a medias.
-        self._fecha_inicio = inicio
-        self._fecha_fin = fin
+        self.__fecha_inicio = inicio
+        self.__fecha_fin = fin
 
     def cambiar_fechas_matricula(self, inicio: date, fin: date) -> None:
         """Cambia juntas las fechas de matrícula, validando que fin >= inicio."""
         inicio = validar_fecha(inicio, "La fecha de inicio de matrícula")
         fin = validar_fecha(fin, "La fecha de fin de matrícula")
         validar_intervalo(inicio, fin, "intervalo de matrícula")
-        self._fecha_inicio_matricula = inicio
-        self._fecha_fin_matricula = fin
+        self.__fecha_inicio_matricula = inicio
+        self.__fecha_fin_matricula = fin
 
     # ---- Verano: 0/1 interno, bool externo ------------------------------------
 
     @property
     def es_verano(self) -> bool:
-        return bool(self._es_verano)
+        return bool(self.__es_verano)
 
     @es_verano.setter
     def es_verano(self, valor: bool | int) -> None:
-        self._es_verano = validar_bandera(valor, "Es verano")
+        self.__es_verano = validar_bandera(valor, "Es verano")
 
     # ---- Nota mínima aprobatoria ----------------------------------------------
 
     @property
     def nota_minima_aprobatoria(self) -> Decimal:
-        return self._nota_minima_aprobatoria
+        return self.__nota_minima_aprobatoria
 
     @nota_minima_aprobatoria.setter
     def nota_minima_aprobatoria(self, valor) -> None:
-        self._nota_minima_aprobatoria = validar_decimal(
+        self.__nota_minima_aprobatoria = validar_decimal(
             valor,
             "La nota mínima aprobatoria",
             minimo=self.NOTA_MINIMA,
@@ -154,18 +154,18 @@ class PeriodoAcademico(RegistroAcademico):
 
     @property
     def estado(self) -> EstadoPeriodo:
-        return self._estado
+        return self.__estado
 
     @estado.setter
     def estado(self, valor: EstadoPeriodo | int) -> None:
         if isinstance(valor, EstadoPeriodo):
-            self._estado = valor
+            self.__estado = valor
             return
         # Acepta el número de la base de datos, pero solo si es 1, 2, 3 o 4.
         if isinstance(valor, bool) or not isinstance(valor, int):
             raise TypeError(f"El estado: debe ser un número entero, se recibió {valor!r}.")
         try:
-            self._estado = EstadoPeriodo(valor)
+            self.__estado = EstadoPeriodo(valor)
         except ValueError:
             raise ValueError(
                 f"El estado: solo puede ser 1 (planificado), 2 (en curso), "

@@ -30,27 +30,27 @@ class Persona(ABC):
 
     @property
     def dni(self) -> str:
-        return self._dni
+        return self.__dni
 
     @dni.setter
     def dni(self, valor: str) -> None:
-        self._dni = validar_cadena(valor, "El DNI")
+        self.__dni = validar_cadena(valor, "El DNI")
 
     @property
     def nombres(self) -> str:
-        return self._nombres
+        return self.__nombres
 
     @nombres.setter
     def nombres(self, valor: str) -> None:
-        self._nombres = validar_cadena(valor, "Los nombres")
+        self.__nombres = validar_cadena(valor, "Los nombres")
 
     @property
     def apellidos(self) -> str:
-        return self._apellidos
+        return self.__apellidos
 
     @apellidos.setter
     def apellidos(self, valor: str) -> None:
-        self._apellidos = validar_cadena(valor, "Los apellidos")
+        self.__apellidos = validar_cadena(valor, "Los apellidos")
 
     @property
     def nombre_completo(self) -> str:

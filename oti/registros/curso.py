@@ -43,7 +43,7 @@ class Curso(RegistroAcademico):
         self.horas_seminario = horas_seminario
         self.horas_virtuales = horas_virtuales
         # El id se genera al final: si alguna validación falla, no se consume un número.
-        self._id = Curso._generar_id()
+        self.__id = Curso._generar_id()
 
     @staticmethod
     def _generar_id() -> int:
@@ -69,25 +69,25 @@ class Curso(RegistroAcademico):
     @property
     def id(self) -> int:
         """Identificador único generado por el sistema. No tiene setter."""
-        return self._id
+        return self.__id
 
     # ---- Código y créditos ----------------------------------------------------
 
     @property
     def codigo(self) -> str:
-        return self._codigo
+        return self.__codigo
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self._codigo = validar_cadena(valor, "El código del curso")
+        self.__codigo = validar_cadena(valor, "El código del curso")
 
     @property
     def creditos(self) -> Decimal:
-        return self._creditos
+        return self.__creditos
 
     @creditos.setter
     def creditos(self, valor) -> None:
-        self._creditos = validar_decimal(
+        self.__creditos = validar_decimal(
             valor,
             "Los créditos del curso",
             minimo=0,
@@ -102,35 +102,35 @@ class Curso(RegistroAcademico):
 
     @property
     def horas_teoricas(self) -> int:
-        return self._horas_teoricas
+        return self.__horas_teoricas
 
     @horas_teoricas.setter
     def horas_teoricas(self, valor: int) -> None:
-        self._horas_teoricas = self._validar_horas(valor, "Las horas teóricas")
+        self.__horas_teoricas = self._validar_horas(valor, "Las horas teóricas")
 
     @property
     def horas_practicas(self) -> int:
-        return self._horas_practicas
+        return self.__horas_practicas
 
     @horas_practicas.setter
     def horas_practicas(self, valor: int) -> None:
-        self._horas_practicas = self._validar_horas(valor, "Las horas prácticas")
+        self.__horas_practicas = self._validar_horas(valor, "Las horas prácticas")
 
     @property
     def horas_seminario(self) -> int:
-        return self._horas_seminario
+        return self.__horas_seminario
 
     @horas_seminario.setter
     def horas_seminario(self, valor: int) -> None:
-        self._horas_seminario = self._validar_horas(valor, "Las horas de seminario")
+        self.__horas_seminario = self._validar_horas(valor, "Las horas de seminario")
 
     @property
     def horas_virtuales(self) -> int:
-        return self._horas_virtuales
+        return self.__horas_virtuales
 
     @horas_virtuales.setter
     def horas_virtuales(self, valor: int) -> None:
-        self._horas_virtuales = self._validar_horas(valor, "Las horas virtuales")
+        self.__horas_virtuales = self._validar_horas(valor, "Las horas virtuales")
 
     # ---- Dato calculado -------------------------------------------------------
 

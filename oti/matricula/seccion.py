@@ -26,55 +26,55 @@ class Seccion:
         self.codigo = codigo
         self.codigo_curso = codigo_curso
         self.codigo_periodo = codigo_periodo
-        self._matriculados = 0  # toda sección nueva empieza sin matriculados
+        self.__matriculados = 0  # toda sección nueva empieza sin matriculados
         self.vacantes = vacantes
 
     # ---- Códigos --------------------------------------------------------------
 
     @property
     def codigo(self) -> str:
-        return self._codigo
+        return self.__codigo
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self._codigo = validar_cadena(valor, "El código de la sección")
+        self.__codigo = validar_cadena(valor, "El código de la sección")
 
     @property
     def codigo_curso(self) -> str:
-        return self._codigo_curso
+        return self.__codigo_curso
 
     @codigo_curso.setter
     def codigo_curso(self, valor: str) -> None:
-        self._codigo_curso = validar_cadena(valor, "El código del curso")
+        self.__codigo_curso = validar_cadena(valor, "El código del curso")
 
     @property
     def codigo_periodo(self) -> str:
-        return self._codigo_periodo
+        return self.__codigo_periodo
 
     @codigo_periodo.setter
     def codigo_periodo(self, valor: str) -> None:
-        self._codigo_periodo = validar_cadena(valor, "El código del periodo")
+        self.__codigo_periodo = validar_cadena(valor, "El código del periodo")
 
     # ---- Vacantes y matriculados ----------------------------------------------
 
     @property
     def vacantes(self) -> int:
-        return self._vacantes
+        return self.__vacantes
 
     @vacantes.setter
     def vacantes(self, valor: int) -> None:
         valor = validar_entero(valor, "Las vacantes", minimo=1)
-        if valor < self._matriculados:
+        if valor < self.__matriculados:
             raise ValueError(
                 f"No se puede reducir las vacantes a {valor}: ya hay "
-                f"{self._matriculados} estudiantes matriculados."
+                f"{self.__matriculados} estudiantes matriculados."
             )
-        self._vacantes = valor
+        self.__vacantes = valor
 
     @property
     def matriculados(self) -> int:
         """Solo lectura. Cambia únicamente con matricular() y retirar()."""
-        return self._matriculados
+        return self.__matriculados
 
     @property
     def vacantes_disponibles(self) -> int:
@@ -87,10 +87,10 @@ class Seccion:
             raise ValueError(
                 f"La sección {self.codigo} está llena ({self.vacantes} vacantes ocupadas)."
             )
-        self._matriculados += 1
+        self.__matriculados += 1
 
     def retirar(self) -> None:
         """Registra el retiro de un estudiante. Rechaza si no hay matriculados."""
-        if self._matriculados == 0:
+        if self.__matriculados == 0:
             raise ValueError(f"La sección {self.codigo} no tiene estudiantes para retirar.")
-        self._matriculados -= 1
+        self.__matriculados -= 1

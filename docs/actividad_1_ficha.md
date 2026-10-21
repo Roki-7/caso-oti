@@ -1,6 +1,6 @@
 # Actividad 1: Identificación de clases, atributos y métodos
 
-Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake_case`; atributos protegidos con prefijo `_` (PEP 8). Las «propiedades» son `@property`.
+Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake_case`; atributos privados con doble guion bajo `__` (en Python esto activa el *name mangling*: el atributo queda oculto fuera de su clase). Las «propiedades» son `@property`.
 
 ---
 
@@ -8,7 +8,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_nombre` (str) | `nombre` (propiedad get/set, valida no vacío y longitud máxima) |
+| `__nombre` (str) | `nombre` (propiedad get/set, valida no vacío y longitud máxima) |
 | | `longitud_maxima_nombre` (propiedad **abstracta**, int) |
 | | `resumen()` (método **abstracto**, str) |
 
@@ -20,14 +20,14 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_id` (int) | `id` (propiedad solo lectura) |
-| `_codigo` (str) | `codigo` (get/set) |
-| `_nombre` (str, heredado) | `creditos` (get/set: > 0, máx. 2 decimales) |
-| `_creditos` (Decimal) | `horas_teoricas`, `horas_practicas`, `horas_seminario`, `horas_virtuales` (get/set: 0–255) |
-| `_horas_teoricas` (int) | `horas_totales` (propiedad **calculada**) |
-| `_horas_practicas` (int) | `longitud_maxima_nombre` → 200 |
-| `_horas_seminario` (int) | `resumen()` |
-| `_horas_virtuales` (int) | |
+| `__id` (int) | `id` (propiedad solo lectura) |
+| `__codigo` (str) | `codigo` (get/set) |
+| `__nombre` (str, heredado) | `creditos` (get/set: > 0, máx. 2 decimales) |
+| `__creditos` (Decimal) | `horas_teoricas`, `horas_practicas`, `horas_seminario`, `horas_virtuales` (get/set: 0–255) |
+| `__horas_teoricas` (int) | `horas_totales` (propiedad **calculada**) |
+| `__horas_practicas` (int) | `longitud_maxima_nombre` → 200 |
+| `__horas_seminario` (int) | `resumen()` |
+| `__horas_virtuales` (int) | |
 
 **Justificación:**
 - «Cada curso tiene un identificador único que el sistema genera al registrarlo y que nadie puede cambiar después» → `id` sin setter.
@@ -42,11 +42,11 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_codigo` (str) | `codigo`, `codigo_curso`, `codigo_periodo` (get/set) |
-| `_codigo_curso` (str) | `vacantes` (get/set: > 0 y ≥ matriculados) |
-| `_codigo_periodo` (str) | `matriculados` (propiedad **solo lectura**) |
-| `_vacantes` (int) | `vacantes_disponibles` (propiedad **calculada**) |
-| `_matriculados` (int) | `matricular()`, `retirar()` |
+| `__codigo` (str) | `codigo`, `codigo_curso`, `codigo_periodo` (get/set) |
+| `__codigo_curso` (str) | `vacantes` (get/set: > 0 y ≥ matriculados) |
+| `__codigo_periodo` (str) | `matriculados` (propiedad **solo lectura**) |
+| `__vacantes` (int) | `vacantes_disponibles` (propiedad **calculada**) |
+| `__matriculados` (int) | `matricular()`, `retirar()` |
 
 **Justificación:**
 - «Un curso del catálogo no tiene vacantes; las vacantes pertenecen a cada sección que abrimos en un periodo».
@@ -62,15 +62,17 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_nombre` (str, heredado) | `anio_aprobacion` (get/set) |
-| `_anio_aprobacion` (int) | `creditos_obligatorios`, `creditos_electivos`, `creditos_extracurriculares` (get/set: ≥ 0) |
-| `_creditos_obligatorios` (Decimal) | `creditos_totales` (propiedad **calculada**, sin setter) |
-| `_creditos_electivos` (Decimal) | `vigente`, `es_nuevo` (get/set: guardan int, devuelven bool) |
-| `_creditos_extracurriculares` (Decimal) | `longitud_maxima_nombre` → 36 |
-| `_vigente` (int: 0/1) | `resumen()` |
-| `_es_nuevo` (int: 0/1) | |
+| `__nombre` (str, heredado) | `anio_aprobacion`, `codigo_escuela` (get/set) |
+| `__anio_aprobacion` (int) | `creditos_obligatorios`, `creditos_electivos`, `creditos_extracurriculares` (get/set: ≥ 0) |
+| `__creditos_obligatorios` (Decimal) | `creditos_totales` (propiedad **calculada**, sin setter) |
+| `__creditos_electivos` (Decimal) | `vigente`, `es_nuevo` (get/set: guardan int, devuelven bool) |
+| `__creditos_extracurriculares` (Decimal) | `longitud_maxima_nombre` → 36 |
+| `__vigente` (int: 0/1) | `resumen()` |
+| `__es_nuevo` (int: 0/1) | |
+| `__codigo_escuela` (str) | |
 
 **Justificación:**
+- «Cada escuela tiene planes de estudio» → el plan guarda `codigo_escuela` (solo el código, por la restricción del encargo).
 - «Cada escuela tiene planes de estudio, identificados por un nombre de hasta 36 caracteres y por el año en que se aprobaron».
 - «Un plan exige una cantidad de créditos obligatorios, otra de créditos electivos y otra de créditos extracurriculares; ninguna puede ser negativa».
 - «El total de créditos del plan es la suma de las tres, y nunca debe poder editarse por separado».
@@ -82,12 +84,12 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_codigo` (str) | `codigo`, `informacion_general`, `perfil_egresado` (get/set) |
-| `_nombre` (str, heredado) | `codigo_director`, `codigo_secretario_academico` (get/set) |
-| `_informacion_general` (str) | `longitud_maxima_nombre` (el caso no da el número; se asume 100) |
-| `_perfil_egresado` (str) | `resumen()` |
-| `_codigo_director` (str) | |
-| `_codigo_secretario_academico` (str) | |
+| `__codigo` (str) | `codigo`, `informacion_general`, `perfil_egresado` (get/set) |
+| `__nombre` (str, heredado) | `codigo_director`, `codigo_secretario_academico` (get/set) |
+| `__informacion_general` (str) | `longitud_maxima_nombre` (el caso no da el número; se asume 100) |
+| `__perfil_egresado` (str) | `resumen()` |
+| `__codigo_director` (str) | |
+| `__codigo_secretario_academico` (str) | |
 
 **Justificación:**
 - «Cada escuela profesional tiene un código, un nombre, una información general y un perfil del egresado».
@@ -100,16 +102,16 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_nombre` (str, heredado) | `numero`, `anio` (get/set) |
-| `_numero` (int) | `fecha_inicio`, `fecha_fin`, `fecha_inicio_matricula`, `fecha_fin_matricula` (solo lectura) |
-| `_anio` (int) | `cambiar_fechas(inicio, fin)` |
-| `_fecha_inicio` (date) | `cambiar_fechas_matricula(inicio, fin)` |
-| `_fecha_fin` (date) | `es_verano` (get/set: guarda int, devuelve bool) |
-| `_fecha_inicio_matricula` (date) | `nota_minima_aprobatoria` (get/set: 0–20) |
-| `_fecha_fin_matricula` (date) | `estado` (get/set: acepta EstadoPeriodo o 1–4) |
-| `_es_verano` (int: 0/1) | `longitud_maxima_nombre` → 45 |
-| `_nota_minima_aprobatoria` (Decimal) | `resumen()` |
-| `_estado` (EstadoPeriodo) | |
+| `__nombre` (str, heredado) | `numero`, `anio` (get/set) |
+| `__numero` (int) | `fecha_inicio`, `fecha_fin`, `fecha_inicio_matricula`, `fecha_fin_matricula` (solo lectura) |
+| `__anio` (int) | `cambiar_fechas(inicio, fin)` |
+| `__fecha_inicio` (date) | `cambiar_fechas_matricula(inicio, fin)` |
+| `__fecha_fin` (date) | `es_verano` (get/set: guarda int, devuelve bool) |
+| `__fecha_inicio_matricula` (date) | `nota_minima_aprobatoria` (get/set: 0–20) |
+| `__fecha_fin_matricula` (date) | `estado` (get/set: acepta EstadoPeriodo o 1–4) |
+| `__es_verano` (int: 0/1) | `longitud_maxima_nombre` → 45 |
+| `__nota_minima_aprobatoria` (Decimal) | `resumen()` |
+| `__estado` (EstadoPeriodo) | |
 
 **Justificación:**
 - «Cada periodo tiene un nombre de hasta 45 caracteres, un número y un año, por ejemplo el periodo 2026-II».
@@ -138,9 +140,9 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_dni` (str) | `dni`, `nombres`, `apellidos` (get/set) |
-| `_nombres` (str) | `nombre_completo` (propiedad **calculada**) |
-| `_apellidos` (str) | `rol` (propiedad **abstracta**) |
+| `__dni` (str) | `dni`, `nombres`, `apellidos` (get/set) |
+| `__nombres` (str) | `nombre_completo` (propiedad **calculada**) |
+| `__apellidos` (str) | `rol` (propiedad **abstracta**) |
 | | `__str__()` (muestra rol y nombre completo) |
 
 **Justificación:**
@@ -154,8 +156,8 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_codigo_estudiante` (str) | `codigo_estudiante`, `codigo_escuela` (get/set) |
-| `_codigo_escuela` (str) | `rol` → «Estudiante» |
+| `__codigo_estudiante` (str) | `codigo_estudiante`, `codigo_escuela` (get/set) |
+| `__codigo_escuela` (str) | `rol` → «Estudiante» |
 
 **Justificación:** «Del estudiante guardamos además su código de estudiante y el código de la escuela a la que pertenece».
 
@@ -165,7 +167,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `_codigo_docente` (str) | `codigo_docente` (get/set) |
+| `__codigo_docente` (str) | `codigo_docente` (get/set) |
 | | `rol` → «Docente» |
 
 **Justificación:** «del docente, su código de docente».

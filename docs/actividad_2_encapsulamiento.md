@@ -1,6 +1,6 @@
 # Actividad 2: Encapsulamiento
 
-Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@property`. Así cada asignación pasa por un setter que valida, y un dato inválido nunca llega a guardarse. Las validaciones comunes están en `oti/base/validaciones.py`. Solo se validan las reglas que dice el caso; los demás datos (códigos, DNI, nombres, apellidos, años) solo se verifican por tipo.
+Todos los datos se guardan en atributos **privados** con doble guion bajo (`__`), que es la convención de Python para lo privado: Python cambia internamente su nombre (*name mangling*), así que `curso.__creditos` no existe fuera de la clase. Se acceden solo mediante `@property`. Así cada asignación pasa por un setter que valida, y un dato inválido nunca llega a guardarse. Las validaciones comunes están en `oti/base/validaciones.py`. Solo se validan las reglas que dice el caso; los demás datos (códigos, DNI, nombres, apellidos, años) solo se verifican por tipo.
 
 ## 2.1 Datos protegidos y su regla de validación
 
@@ -10,7 +10,7 @@ Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@
 | Curso | `creditos` | Mayor que 0, hasta 2 decimales | «siempre es mayor que cero y puede tener hasta dos decimales» |
 | Curso | `horas_teoricas`, `horas_practicas`, `horas_seminario`, `horas_virtuales` | Enteros de 0 a 255 | «ninguna de esas horas puede ser negativa ni pasar de 255» |
 | Seccion | `vacantes` | Entero mayor que 0 y no menor que `matriculados` | «vacantes mayor que cero», «no se puede reducir el número de vacantes por debajo de los que ya están matriculados» |
-| Seccion | `matriculados` | Solo cambia de uno en uno; nunca supera vacantes ni baja de 0 | «Si la sección está llena, la matrícula debe rechazarse» |
+| Seccion | `matriculados` | Entre 0 y vacantes; solo cambia de uno en uno | «Si la sección está llena, la matrícula debe rechazarse» |
 | PlanEstudios | `creditos_obligatorios`, `creditos_electivos`, `creditos_extracurriculares` | Mayores o iguales a 0 | «ninguna puede ser negativa» |
 | PlanEstudios | `vigente`, `es_nuevo` | Solo 0/1 o True/False | «se guarda un 0 o un 1» |
 | PeriodoAcademico | fechas del periodo y de matrícula | `fin >= inicio` en cada intervalo | «En ningún caso la fecha de fin puede ser anterior a la de inicio» |
@@ -47,9 +47,9 @@ Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@
 
 | Dato | Se guarda como | Se entrega como |
 |---|---|---|
-| `PlanEstudios.vigente` | `int` (0 o 1) en `_vigente` | `bool` |
-| `PlanEstudios.es_nuevo` | `int` (0 o 1) en `_es_nuevo` | `bool` |
-| `PeriodoAcademico.es_verano` | `int` (0 o 1) en `_es_verano` | `bool` |
+| `PlanEstudios.vigente` | `int` (0 o 1) en `__vigente` | `bool` |
+| `PlanEstudios.es_nuevo` | `int` (0 o 1) en `__es_nuevo` | `bool` |
+| `PeriodoAcademico.es_verano` | `int` (0 o 1) en `__es_verano` | `bool` |
 | `PeriodoAcademico.estado` | Llega como `int` (1–4) desde la base de datos | `EstadoPeriodo` (Enum) |
 
 El setter acepta tanto `True/False` como `0/1` (lo que llega de la base de datos) y siempre guarda el entero. El getter convierte a `bool`. De este modo se respeta el formato de la base de datos y quien consulta recibe una respuesta clara: «verdadero o falso».
