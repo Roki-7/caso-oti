@@ -16,8 +16,11 @@ class Estudiante(Persona):
         codigo_escuela: str,
     ):
         super().__init__(dni, nombres, apellidos)
-        self.codigo_estudiante = codigo_estudiante
-        self.codigo_escuela = codigo_escuela
+        # Atributos privados (-)
+        self.__codigo_estudiante = codigo_estudiante
+        self.__codigo_escuela = codigo_escuela
+
+    # ---- Propiedades públicas (+) --------------------------------------------
 
     @property
     def rol(self) -> str:

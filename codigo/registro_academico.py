@@ -16,7 +16,8 @@ class RegistroAcademico(ABC):
     """Registro académico con nombre validado. No puede instanciarse."""
 
     def __init__(self, nombre: str):
-        self.nombre = nombre  # pasa por el setter, que valida
+        # Atributo privado (-)
+        self.__nombre = validar_texto(nombre, "El nombre", self.longitud_maxima_nombre)
 
     # ---- Contrato que toda subclase está obligada a cumplir -------------------
 
@@ -29,7 +30,7 @@ class RegistroAcademico(ABC):
     def resumen(self) -> str:
         """Descripción breve del registro (base del polimorfismo)."""
 
-    # ---- Comportamiento común heredado por todas las subclases ----------------
+    # ---- Propiedad pública (+) heredada por todas las subclases --------------
 
     @property
     def nombre(self) -> str:

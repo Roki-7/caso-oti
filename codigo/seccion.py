@@ -23,13 +23,14 @@ class Seccion:
     """
 
     def __init__(self, codigo: str, codigo_curso: str, codigo_periodo: str, vacantes: int):
-        self.codigo = codigo
-        self.codigo_curso = codigo_curso
-        self.codigo_periodo = codigo_periodo
+        # Atributos privados (-)
+        self.__codigo = codigo
+        self.__codigo_curso = codigo_curso
+        self.__codigo_periodo = codigo_periodo
+        self.__vacantes = validar_entero(vacantes, "Las vacantes", minimo=1)
         self.__matriculados = 0  # toda sección nueva empieza sin matriculados
-        self.vacantes = vacantes
 
-    # ---- Códigos --------------------------------------------------------------
+    # ---- Propiedades públicas (+): códigos -----------------------------------
 
     @property
     def codigo(self) -> str:
@@ -55,7 +56,7 @@ class Seccion:
     def codigo_periodo(self, valor: str) -> None:
         self.__codigo_periodo = valor
 
-    # ---- Vacantes y matriculados ----------------------------------------------
+    # ---- Propiedades públicas (+): vacantes y matriculados -------------------
 
     @property
     def vacantes(self) -> int:

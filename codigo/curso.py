@@ -1,9 +1,13 @@
 """Curso del catálogo universitario."""
 
 from decimal import Decimal
+from itertools import count
 
 from registro_academico import RegistroAcademico
 from validaciones import validar_decimal, validar_entero
+
+# Contador del módulo que genera los ids de los cursos: 1, 2, 3...
+_ids = count(1)
 
 
 class Curso(RegistroAcademico):
@@ -19,12 +23,6 @@ class Curso(RegistroAcademico):
       guardarlas» -> `horas_totales` se calcula.
     """
 
-    LONGITUD_MAXIMA_NOMBRE = 200
-    HORAS_MAXIMAS = 255  # máximo de un TINYINT UNSIGNED en la base de datos
-    MAXIMO_DECIMALES_CREDITOS = 2
-
-    _ultimo_id = 0  # contador compartido por todos los cursos (atributo de clase)
-
     def __init__(
         self,
         codigo: str,
@@ -36,25 +34,23 @@ class Curso(RegistroAcademico):
         horas_virtuales: int = 0,
     ):
         super().__init__(nombre)
-        self.codigo = codigo
-        self.creditos = creditos
-        self.horas_teoricas = horas_teoricas
-        self.horas_practicas = horas_practicas
-        self.horas_seminario = horas_seminario
-        self.horas_virtuales = horas_virtuales
+        # Atributos privados (-)
+        self.__codigo = codigo
+        self.__creditos = validar_decimal(
+            creditos, "Los créditos del curso", minimo=0, minimo_inclusivo=False, max_decimales=2
+        )
+        self.__horas_teoricas = validar_entero(horas_teoricas, "Las horas teóricas", minimo=0, maximo=255)
+        self.__horas_practicas = validar_entero(horas_practicas, "Las horas prácticas", minimo=0, maximo=255)
+        self.__horas_seminario = validar_entero(horas_seminario, "Las horas de seminario", minimo=0, maximo=255)
+        self.__horas_virtuales = validar_entero(horas_virtuales, "Las horas virtuales", minimo=0, maximo=255)
         # El id se genera al final: si alguna validación falla, no se consume un número.
-        self.__id = Curso._generar_id()
-
-    @staticmethod
-    def _generar_id() -> int:
-        Curso._ultimo_id += 1
-        return Curso._ultimo_id
+        self.__id = next(_ids)
 
     # ---- Implementación del contrato abstracto --------------------------------
 
     @property
     def longitud_maxima_nombre(self) -> int:
-        return self.LONGITUD_MAXIMA_NOMBRE
+        return 200
 
     def resumen(self) -> str:
         return (
@@ -64,14 +60,14 @@ class Curso(RegistroAcademico):
             f"S:{self.horas_seminario} V:{self.horas_virtuales})"
         )
 
-    # ---- Identificador: solo lectura ------------------------------------------
+    # ---- Propiedades públicas (+): identificador de solo lectura -------------
 
     @property
     def id(self) -> int:
         """Identificador único generado por el sistema. No tiene setter."""
         return self.__id
 
-    # ---- Código y créditos ----------------------------------------------------
+    # ---- Propiedades públicas (+): código y créditos -------------------------
 
     @property
     def codigo(self) -> str:
@@ -92,13 +88,10 @@ class Curso(RegistroAcademico):
             "Los créditos del curso",
             minimo=0,
             minimo_inclusivo=False,  # «siempre es mayor que cero»
-            max_decimales=self.MAXIMO_DECIMALES_CREDITOS,
+            max_decimales=2,
         )
 
-    # ---- Horas (0 a 255 cada una) ---------------------------------------------
-
-    def _validar_horas(self, valor: int, campo: str) -> int:
-        return validar_entero(valor, campo, minimo=0, maximo=self.HORAS_MAXIMAS)
+    # ---- Propiedades públicas (+): horas (0 a 255 cada una) ------------------
 
     @property
     def horas_teoricas(self) -> int:
@@ -106,7 +99,7 @@ class Curso(RegistroAcademico):
 
     @horas_teoricas.setter
     def horas_teoricas(self, valor: int) -> None:
-        self.__horas_teoricas = self._validar_horas(valor, "Las horas teóricas")
+        self.__horas_teoricas = validar_entero(valor, "Las horas teóricas", minimo=0, maximo=255)
 
     @property
     def horas_practicas(self) -> int:
@@ -114,7 +107,7 @@ class Curso(RegistroAcademico):
 
     @horas_practicas.setter
     def horas_practicas(self, valor: int) -> None:
-        self.__horas_practicas = self._validar_horas(valor, "Las horas prácticas")
+        self.__horas_practicas = validar_entero(valor, "Las horas prácticas", minimo=0, maximo=255)
 
     @property
     def horas_seminario(self) -> int:
@@ -122,7 +115,7 @@ class Curso(RegistroAcademico):
 
     @horas_seminario.setter
     def horas_seminario(self, valor: int) -> None:
-        self.__horas_seminario = self._validar_horas(valor, "Las horas de seminario")
+        self.__horas_seminario = validar_entero(valor, "Las horas de seminario", minimo=0, maximo=255)
 
     @property
     def horas_virtuales(self) -> int:
@@ -130,9 +123,9 @@ class Curso(RegistroAcademico):
 
     @horas_virtuales.setter
     def horas_virtuales(self, valor: int) -> None:
-        self.__horas_virtuales = self._validar_horas(valor, "Las horas virtuales")
+        self.__horas_virtuales = validar_entero(valor, "Las horas virtuales", minimo=0, maximo=255)
 
-    # ---- Dato calculado -------------------------------------------------------
+    # ---- Propiedad pública (+) calculada -------------------------------------
 
     @property
     def horas_totales(self) -> int:

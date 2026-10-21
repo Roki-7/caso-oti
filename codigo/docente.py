@@ -8,7 +8,10 @@ class Docente(Persona):
 
     def __init__(self, dni: str, nombres: str, apellidos: str, codigo_docente: str):
         super().__init__(dni, nombres, apellidos)
-        self.codigo_docente = codigo_docente
+        # Atributos privados (-)
+        self.__codigo_docente = codigo_docente
+
+    # ---- Propiedades públicas (+) --------------------------------------------
 
     @property
     def rol(self) -> str:

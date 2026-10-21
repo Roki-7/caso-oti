@@ -16,8 +16,6 @@ class EscuelaProfesional(RegistroAcademico):
     validarse») pero no indica su tamaño máximo; se asume 100 caracteres.
     """
 
-    LONGITUD_MAXIMA_NOMBRE = 100  # valor asumido: el caso no lo indica
-
     def __init__(
         self,
         codigo: str,
@@ -28,17 +26,18 @@ class EscuelaProfesional(RegistroAcademico):
         codigo_secretario_academico: str,
     ):
         super().__init__(nombre)
-        self.codigo = codigo
-        self.informacion_general = informacion_general
-        self.perfil_egresado = perfil_egresado
-        self.codigo_director = codigo_director
-        self.codigo_secretario_academico = codigo_secretario_academico
+        # Atributos privados (-)
+        self.__codigo = codigo
+        self.__informacion_general = informacion_general
+        self.__perfil_egresado = perfil_egresado
+        self.__codigo_director = codigo_director
+        self.__codigo_secretario_academico = codigo_secretario_academico
 
     # ---- Implementación del contrato abstracto --------------------------------
 
     @property
     def longitud_maxima_nombre(self) -> int:
-        return self.LONGITUD_MAXIMA_NOMBRE
+        return 100  # valor asumido: el caso no lo indica
 
     def resumen(self) -> str:
         return (
@@ -47,7 +46,7 @@ class EscuelaProfesional(RegistroAcademico):
             f"secretario académico: {self.codigo_secretario_academico}"
         )
 
-    # ---- Propiedades ----------------------------------------------------------
+    # ---- Propiedades públicas (+) --------------------------------------------
 
     @property
     def codigo(self) -> str:

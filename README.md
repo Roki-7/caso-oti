@@ -9,7 +9,6 @@ La OTI de la universidad usa una base de datos que guarda la información, pero 
 | N.º | Entregable | Archivo |
 |:---:|---|---|
 | 1 | Ficha de la Actividad 1 | [1_ficha_actividad_1.md](1_ficha_actividad_1.md) |
-| 2 | Diagrama de clases UML | [2_diagrama_uml/diagrama_clases.png](2_diagrama_uml/diagrama_clases.png) |
 | 3 | Desarrollo de las actividades 2 a 5 | [3_desarrollo_actividades.md](3_desarrollo_actividades.md) |
 | — | Código en Python y programa de prueba | [codigo/](codigo/) |
 

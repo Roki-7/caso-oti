@@ -18,14 +18,17 @@ class Persona(ABC):
     """
 
     def __init__(self, dni: str, nombres: str, apellidos: str):
-        self.dni = dni
-        self.nombres = nombres
-        self.apellidos = apellidos
+        # Atributos privados (-)
+        self.__dni = dni
+        self.__nombres = nombres
+        self.__apellidos = apellidos
 
     @property
     @abstractmethod
     def rol(self) -> str:
         """Rol que la persona cumple en la universidad."""
+
+    # ---- Propiedades públicas (+) --------------------------------------------
 
     @property
     def dni(self) -> str:

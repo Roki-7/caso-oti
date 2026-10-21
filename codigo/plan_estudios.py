@@ -20,8 +20,6 @@ class PlanEstudios(RegistroAcademico):
       verdadero o falso» -> `__vigente` y `__es_nuevo` son int; las propiedades devuelven bool.
     """
 
-    LONGITUD_MAXIMA_NOMBRE = 36
-
     def __init__(
         self,
         nombre: str,
@@ -34,19 +32,22 @@ class PlanEstudios(RegistroAcademico):
         es_nuevo: bool | int = False,
     ):
         super().__init__(nombre)
-        self.anio_aprobacion = anio_aprobacion
-        self.codigo_escuela = codigo_escuela
-        self.creditos_obligatorios = creditos_obligatorios
-        self.creditos_electivos = creditos_electivos
-        self.creditos_extracurriculares = creditos_extracurriculares
-        self.vigente = vigente
-        self.es_nuevo = es_nuevo
+        # Atributos privados (-)
+        self.__anio_aprobacion = anio_aprobacion
+        self.__codigo_escuela = codigo_escuela
+        self.__creditos_obligatorios = validar_decimal(creditos_obligatorios, "Los créditos obligatorios", minimo=0)
+        self.__creditos_electivos = validar_decimal(creditos_electivos, "Los créditos electivos", minimo=0)
+        self.__creditos_extracurriculares = validar_decimal(
+            creditos_extracurriculares, "Los créditos extracurriculares", minimo=0
+        )
+        self.__vigente = validar_bandera(vigente, "Vigente")
+        self.__es_nuevo = validar_bandera(es_nuevo, "Es nuevo")
 
     # ---- Implementación del contrato abstracto --------------------------------
 
     @property
     def longitud_maxima_nombre(self) -> int:
-        return self.LONGITUD_MAXIMA_NOMBRE
+        return 36
 
     def resumen(self) -> str:
         estado = "vigente" if self.vigente else "no vigente"
@@ -59,7 +60,7 @@ class PlanEstudios(RegistroAcademico):
             f"Extra:{self.creditos_extracurriculares}) | {estado}{nuevo}"
         )
 
-    # ---- Identificación -------------------------------------------------------
+    # ---- Propiedades públicas (+): identificación ----------------------------
 
     @property
     def anio_aprobacion(self) -> int:
@@ -77,11 +78,7 @@ class PlanEstudios(RegistroAcademico):
     def codigo_escuela(self, valor: str) -> None:
         self.__codigo_escuela = valor
 
-    # ---- Créditos (ninguno negativo) ------------------------------------------
-
-    @staticmethod
-    def _validar_creditos(valor, campo: str) -> Decimal:
-        return validar_decimal(valor, campo, minimo=0)
+    # ---- Propiedades públicas (+): créditos (ninguno negativo) ---------------
 
     @property
     def creditos_obligatorios(self) -> Decimal:
@@ -89,7 +86,7 @@ class PlanEstudios(RegistroAcademico):
 
     @creditos_obligatorios.setter
     def creditos_obligatorios(self, valor) -> None:
-        self.__creditos_obligatorios = self._validar_creditos(valor, "Los créditos obligatorios")
+        self.__creditos_obligatorios = validar_decimal(valor, "Los créditos obligatorios", minimo=0)
 
     @property
     def creditos_electivos(self) -> Decimal:
@@ -97,7 +94,7 @@ class PlanEstudios(RegistroAcademico):
 
     @creditos_electivos.setter
     def creditos_electivos(self, valor) -> None:
-        self.__creditos_electivos = self._validar_creditos(valor, "Los créditos electivos")
+        self.__creditos_electivos = validar_decimal(valor, "Los créditos electivos", minimo=0)
 
     @property
     def creditos_extracurriculares(self) -> Decimal:
@@ -105,9 +102,7 @@ class PlanEstudios(RegistroAcademico):
 
     @creditos_extracurriculares.setter
     def creditos_extracurriculares(self, valor) -> None:
-        self.__creditos_extracurriculares = self._validar_creditos(
-            valor, "Los créditos extracurriculares"
-        )
+        self.__creditos_extracurriculares = validar_decimal(valor, "Los créditos extracurriculares", minimo=0)
 
     @property
     def creditos_totales(self) -> Decimal:
@@ -118,7 +113,7 @@ class PlanEstudios(RegistroAcademico):
             + self.creditos_extracurriculares
         )
 
-    # ---- Banderas: se guardan como 0/1 y se entregan como bool ----------------
+    # ---- Propiedades públicas (+): se guardan como 0/1 y se entregan como bool ----
 
     @property
     def vigente(self) -> bool:

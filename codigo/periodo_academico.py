@@ -22,10 +22,6 @@ class PeriodoAcademico(RegistroAcademico):
     - estado: 1 planificado, 2 en curso, 3 matrícula cerrada, 4 finalizado -> Enum.
     """
 
-    LONGITUD_MAXIMA_NOMBRE = 45
-    NOTA_MINIMA = 0
-    NOTA_MAXIMA = 20
-
     def __init__(
         self,
         nombre: str,
@@ -40,19 +36,26 @@ class PeriodoAcademico(RegistroAcademico):
         estado: EstadoPeriodo | int = EstadoPeriodo.PLANIFICADO,
     ):
         super().__init__(nombre)
-        self.numero = numero
-        self.anio = anio
-        self.cambiar_fechas(fecha_inicio, fecha_fin)
-        self.cambiar_fechas_matricula(fecha_inicio_matricula, fecha_fin_matricula)
-        self.nota_minima_aprobatoria = nota_minima_aprobatoria
-        self.es_verano = es_verano
-        self.estado = estado
+        validar_intervalo(fecha_inicio, fecha_fin, "periodo")
+        validar_intervalo(fecha_inicio_matricula, fecha_fin_matricula, "intervalo de matrícula")
+        # Atributos privados (-)
+        self.__numero = numero
+        self.__anio = anio
+        self.__fecha_inicio = fecha_inicio
+        self.__fecha_fin = fecha_fin
+        self.__fecha_inicio_matricula = fecha_inicio_matricula
+        self.__fecha_fin_matricula = fecha_fin_matricula
+        self.__es_verano = validar_bandera(es_verano, "Es verano")
+        self.__nota_minima_aprobatoria = validar_decimal(
+            nota_minima_aprobatoria, "La nota mínima aprobatoria", minimo=0, maximo=20
+        )
+        self.estado = estado  # la propiedad valida que sea 1, 2, 3 o 4 y guarda self.__estado
 
     # ---- Implementación del contrato abstracto --------------------------------
 
     @property
     def longitud_maxima_nombre(self) -> int:
-        return self.LONGITUD_MAXIMA_NOMBRE
+        return 45
 
     def resumen(self) -> str:
         verano = " (verano)" if self.es_verano else ""
@@ -63,7 +66,7 @@ class PeriodoAcademico(RegistroAcademico):
             f"nota mínima {self.nota_minima_aprobatoria} | estado {self.estado.name}"
         )
 
-    # ---- Identificación -------------------------------------------------------
+    # ---- Propiedades públicas (+): identificación ----------------------------
 
     @property
     def numero(self) -> int:
@@ -81,7 +84,7 @@ class PeriodoAcademico(RegistroAcademico):
     def anio(self, valor: int) -> None:
         self.__anio = valor
 
-    # ---- Fechas: solo lectura, se cambian de a dos ----------------------------
+    # ---- Propiedades públicas (+): fechas de solo lectura, se cambian de a dos ----
 
     @property
     def fecha_inicio(self) -> date:
@@ -112,7 +115,7 @@ class PeriodoAcademico(RegistroAcademico):
         self.__fecha_inicio_matricula = inicio
         self.__fecha_fin_matricula = fin
 
-    # ---- Verano: 0/1 interno, bool externo ------------------------------------
+    # ---- Propiedad pública (+): verano, 0/1 interno y bool externo -----------
 
     @property
     def es_verano(self) -> bool:
@@ -122,7 +125,7 @@ class PeriodoAcademico(RegistroAcademico):
     def es_verano(self, valor: bool | int) -> None:
         self.__es_verano = validar_bandera(valor, "Es verano")
 
-    # ---- Nota mínima aprobatoria ----------------------------------------------
+    # ---- Propiedad pública (+): nota mínima aprobatoria ----------------------
 
     @property
     def nota_minima_aprobatoria(self) -> Decimal:
@@ -133,11 +136,11 @@ class PeriodoAcademico(RegistroAcademico):
         self.__nota_minima_aprobatoria = validar_decimal(
             valor,
             "La nota mínima aprobatoria",
-            minimo=self.NOTA_MINIMA,
-            maximo=self.NOTA_MAXIMA,
+            minimo=0,
+            maximo=20,
         )
 
-    # ---- Estado ---------------------------------------------------------------
+    # ---- Propiedad pública (+): estado ---------------------------------------
 
     @property
     def estado(self) -> EstadoPeriodo:
