@@ -1,0 +1,13 @@
+=== Polimorfismo: lista mixta de registros académicos ===
+[Curso #1] IS-282 - Programación Orientada a Objetos | 4.5 créditos | 6 h totales (T:2 P:4 S:0 V:0)
+[Plan de estudios] Plan de estudios 2018 (2018) - escuela IS | 220 créditos (Oblig:180 Elect:30 Extra:10) | vigente
+[Escuela profesional] IS - Ingeniería de Sistemas | director: DOC-001 | secretario académico: DOC-002
+[Periodo académico] 2026-II - Segundo semestre académico 2026 | 2026-08-17 a 2026-12-18 | matrícula 2026-08-03 a 2026-08-14 | nota mínima 10.5 | En curso
+
+=== Polimorfismo: lista mixta de personas ===
+Estudiante: Ana Lucía Quispe Huamán (DNI 70123456) | código 2020100 | escuela IS
+Docente: Luis Alberto Pérez Rojas (DNI 40123456) | código DOC-001
+
+=== Sección: matrícula controlada ===
+[Sección] IS282-A - curso IS-282, periodo 2026-II | 2/2 matriculados, 0 disponibles
+Matrícula rechazada: La sección IS282-A está llena (2 vacantes ocupadas).
