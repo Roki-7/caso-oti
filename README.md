@@ -38,6 +38,7 @@ caso-oti/
     ├── salida_main.txt
     └── uml/
         ├── README.md               # Diagrama UML (GitHub lo muestra)
+        ├── diagrama_clases.drawio  # Diagrama editable en draw.io
         ├── diagrama_clases.mmd     # Fuente Mermaid
         ├── diagrama_clases.png
         └── diagrama_clases.svg
