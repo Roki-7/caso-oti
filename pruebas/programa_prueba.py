@@ -77,7 +77,7 @@ def curso_valido(**cambios) -> Curso:
 
 
 def plan_valido(**cambios) -> PlanEstudios:
-    datos = dict(nombre="Plan 2018", anio_aprobacion=2018, codigo_escuela="IS",
+    datos = dict(nombre="Plan 2018", anio_aprobacion=2018,
                  creditos_obligatorios=180, creditos_electivos=30,
                  creditos_extracurriculares=10, vigente=1, es_nuevo=0)
     datos.update(cambios)
@@ -308,7 +308,7 @@ def probar_periodo() -> None:
     regla("R25", "El estado solo puede ser 1, 2, 3 o 4 (Enum EstadoPeriodo)")
     p = periodo_valido()
     aceptado("estado = 2 (número de la base de datos)",
-             lambda: (asignar(p, "estado", 2), p.estado, p.estado.descripcion)[1:])
+             lambda: (asignar(p, "estado", 2), p.estado)[1])
     aceptado("estado = EstadoPeriodo.FINALIZADO",
              lambda: (asignar(p, "estado", EstadoPeriodo.FINALIZADO), p.estado)[1])
     rechazado("estado = 7", lambda: asignar(p, "estado", 7))

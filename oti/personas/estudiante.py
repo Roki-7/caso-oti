@@ -39,10 +39,3 @@ class Estudiante(Persona):
     @codigo_escuela.setter
     def codigo_escuela(self, valor: str) -> None:
         self._codigo_escuela = validar_texto(valor, "El código de la escuela")
-
-    def __str__(self) -> str:
-        # Redefine __str__ ampliando el de Persona.
-        return (
-            f"{super().__str__()} | código {self.codigo_estudiante} | "
-            f"escuela {self.codigo_escuela}"
-        )

@@ -17,26 +17,3 @@ class EstadoPeriodo(Enum):
     EN_CURSO = 2
     MATRICULA_CERRADA = 3
     FINALIZADO = 4
-
-    @property
-    def descripcion(self) -> str:
-        """Texto legible del estado, para mostrar al usuario."""
-        return {
-            1: "Planificado",
-            2: "En curso",
-            3: "Matrícula cerrada",
-            4: "Finalizado",
-        }[self.value]
-
-    @classmethod
-    def desde_numero(cls, numero: int) -> "EstadoPeriodo":
-        """Convierte el número guardado en la base de datos al estado correspondiente."""
-        if isinstance(numero, bool) or not isinstance(numero, int):
-            raise TypeError(f"El estado debe ser un número entero, se recibió {numero!r}.")
-        try:
-            return cls(numero)
-        except ValueError:
-            permitidos = ", ".join(f"{e.value}={e.descripcion}" for e in cls)
-            raise ValueError(
-                f"Estado de periodo inválido: {numero}. Valores permitidos: {permitidos}."
-            ) from None

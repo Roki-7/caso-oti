@@ -31,7 +31,6 @@ def crear_registros() -> list:
     plan = PlanEstudios(
         nombre="Plan de estudios 2018",
         anio_aprobacion=2018,
-        codigo_escuela="IS",
         creditos_obligatorios=180,
         creditos_electivos=30,
         creditos_extracurriculares=10,
@@ -73,13 +72,13 @@ def main() -> None:
         Docente("40123456", "Luis Alberto", "Pérez Rojas", "DOC-001"),
     ]
     for persona in personas:
-        print(persona)  # __str__ de Persona usa el rol que redefine cada subclase
+        print(persona)  # __str__ de Persona usa el rol que define cada subclase
 
     print("\n=== Sección: matrícula controlada ===")
     seccion = Seccion("IS282-A", "IS-282", "2026-II", vacantes=2)
     seccion.matricular()
     seccion.matricular()
-    print(seccion)
+    print(f"Sección {seccion.codigo}: {seccion.matriculados}/{seccion.vacantes} matriculados, {seccion.vacantes_disponibles} disponibles")
     try:
         seccion.matricular()
     except ValueError as error:

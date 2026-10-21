@@ -22,6 +22,3 @@ class Docente(Persona):
     @codigo_docente.setter
     def codigo_docente(self, valor: str) -> None:
         self._codigo_docente = validar_texto(valor, "El código de docente")
-
-    def __str__(self) -> str:
-        return f"{super().__str__()} | código {self.codigo_docente}"

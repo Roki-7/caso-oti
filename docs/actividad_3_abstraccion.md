@@ -46,11 +46,11 @@ implementation for abstract methods 'longitud_maxima_nombre', 'resumen'
 
 | Clase abstracta | Miembro abstracto | Por qué es abstracto |
 |---|---|---|
-| `RegistroAcademico` | `longitud_maxima_nombre` (propiedad) | El tamaño máximo «cambia en cada caso»: solo cada subclase lo conoce (200, 36, 100, 45) |
+| `RegistroAcademico` | `longitud_maxima_nombre` (propiedad) | El tamaño máximo «cambia en cada caso»: solo cada subclase lo conoce (curso 200, plan 36, periodo 45; para la escuela el caso no lo indica) |
 | `RegistroAcademico` | `resumen()` | Cada registro se describe distinto; es la base del polimorfismo |
 | `Persona` | `rol` (propiedad) | «esa respuesta es distinta para un estudiante y para un docente» |
 
-**Lo que NO es abstracto:** el setter de `nombre`, `nombre_completo` y `__str__` son iguales para todas las subclases, así que se implementan una vez en la clase base y se heredan.
+**Lo que NO es abstracto:** el setter de `nombre` (en `RegistroAcademico`) y `nombre_completo` y `__str__` (en `Persona`) son iguales para todas las subclases, así que se implementan una vez en la clase base y se heredan.
 
 Si una subclase olvida implementar un miembro abstracto, Python impide crearla:
 
@@ -80,11 +80,10 @@ Ventajas:
 
 1. **Solo existen 4 valores.** `EstadoPeriodo(7)` lanza `ValueError`, así que un estado 7 no puede ni crearse.
 2. **El código se lee con nombres**: `periodo.estado = EstadoPeriodo.EN_CURSO` en vez de `periodo.estado = 2`.
-3. **Compatible con la base de datos**: `EstadoPeriodo.EN_CURSO.value` devuelve `2` para guardarlo, y `EstadoPeriodo.desde_numero(2)` lo reconstruye al leerlo.
-4. **Texto legible**: la propiedad `descripcion` devuelve «En curso», «Matrícula cerrada», etc.
+3. **Compatible con la base de datos**: `EstadoPeriodo.EN_CURSO.value` devuelve `2` para guardarlo, y `EstadoPeriodo(2)` lo reconstruye al leerlo.
 
 ```
 >>> periodo.estado = 7
-ValueError: Estado de periodo inválido: 7. Valores permitidos: 1=Planificado,
-2=En curso, 3=Matrícula cerrada, 4=Finalizado.
+ValueError: El estado: solo puede ser 1 (planificado), 2 (en curso),
+3 (matrícula cerrada) o 4 (finalizado); se recibió 7.
 ```

@@ -65,10 +65,11 @@ class PeriodoAcademico(RegistroAcademico):
     def resumen(self) -> str:
         verano = " (verano)" if self.es_verano else ""
         return (
-            f"[Periodo académico] {self.codigo}{verano} - {self.nombre} | "
+            f"[Periodo académico] {self.anio}-{_ROMANOS.get(self.numero, self.numero)}"
+            f"{verano} - {self.nombre} | "
             f"{self.fecha_inicio} a {self.fecha_fin} | matrícula "
             f"{self.fecha_inicio_matricula} a {self.fecha_fin_matricula} | "
-            f"nota mínima {self.nota_minima_aprobatoria} | {self.estado.descripcion}"
+            f"nota mínima {self.nota_minima_aprobatoria} | estado {self.estado.name}"
         )
 
     # ---- Identificación -------------------------------------------------------
@@ -88,11 +89,6 @@ class PeriodoAcademico(RegistroAcademico):
     @anio.setter
     def anio(self, valor: int) -> None:
         self._anio = validar_entero(valor, "El año del periodo", minimo=1)
-
-    @property
-    def codigo(self) -> str:
-        """Denominación calculada a partir del año y el número, p. ej. '2026-II'."""
-        return f"{self.anio}-{_ROMANOS.get(self.numero, str(self.numero))}"
 
     # ---- Fechas: solo lectura, se cambian de a dos ----------------------------
 
@@ -164,6 +160,14 @@ class PeriodoAcademico(RegistroAcademico):
     def estado(self, valor: EstadoPeriodo | int) -> None:
         if isinstance(valor, EstadoPeriodo):
             self._estado = valor
-        else:
-            # Acepta el número de la base de datos, pero solo si es 1, 2, 3 o 4.
-            self._estado = EstadoPeriodo.desde_numero(valor)
+            return
+        # Acepta el número de la base de datos, pero solo si es 1, 2, 3 o 4.
+        if isinstance(valor, bool) or not isinstance(valor, int):
+            raise TypeError(f"El estado: debe ser un número entero, se recibió {valor!r}.")
+        try:
+            self._estado = EstadoPeriodo(valor)
+        except ValueError:
+            raise ValueError(
+                f"El estado: solo puede ser 1 (planificado), 2 (en curso), "
+                f"3 (matrícula cerrada) o 4 (finalizado); se recibió {valor}."
+            ) from None

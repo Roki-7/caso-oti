@@ -7,7 +7,6 @@ from oti.base.validaciones import (
     validar_bandera,
     validar_decimal,
     validar_entero,
-    validar_texto,
 )
 
 
@@ -21,7 +20,6 @@ class PlanEstudios(RegistroAcademico):
       editarse por separado» -> `creditos_totales` se calcula y no tiene setter.
     - «se guarda un 0 o un 1 ... que a quien lo consulte le responda simplemente
       verdadero o falso» -> `_vigente` y `_es_nuevo` son int; las propiedades devuelven bool.
-    - Restricción del encargo: la escuela se referencia solo por su código (texto).
     """
 
     LONGITUD_MAXIMA_NOMBRE = 36
@@ -30,7 +28,6 @@ class PlanEstudios(RegistroAcademico):
         self,
         nombre: str,
         anio_aprobacion: int,
-        codigo_escuela: str,
         creditos_obligatorios,
         creditos_electivos,
         creditos_extracurriculares,
@@ -39,7 +36,6 @@ class PlanEstudios(RegistroAcademico):
     ):
         super().__init__(nombre)
         self.anio_aprobacion = anio_aprobacion
-        self.codigo_escuela = codigo_escuela
         self.creditos_obligatorios = creditos_obligatorios
         self.creditos_electivos = creditos_electivos
         self.creditos_extracurriculares = creditos_extracurriculares
@@ -56,8 +52,8 @@ class PlanEstudios(RegistroAcademico):
         estado = "vigente" if self.vigente else "no vigente"
         nuevo = ", nuevo" if self.es_nuevo else ""
         return (
-            f"[Plan de estudios] {self.nombre} ({self.anio_aprobacion}) - escuela "
-            f"{self.codigo_escuela} | {self.creditos_totales} créditos "
+            f"[Plan de estudios] {self.nombre} ({self.anio_aprobacion}) | "
+            f"{self.creditos_totales} créditos "
             f"(Oblig:{self.creditos_obligatorios} Elect:{self.creditos_electivos} "
             f"Extra:{self.creditos_extracurriculares}) | {estado}{nuevo}"
         )
@@ -71,14 +67,6 @@ class PlanEstudios(RegistroAcademico):
     @anio_aprobacion.setter
     def anio_aprobacion(self, valor: int) -> None:
         self._anio_aprobacion = validar_entero(valor, "El año de aprobación", minimo=1)
-
-    @property
-    def codigo_escuela(self) -> str:
-        return self._codigo_escuela
-
-    @codigo_escuela.setter
-    def codigo_escuela(self, valor: str) -> None:
-        self._codigo_escuela = validar_texto(valor, "El código de la escuela")
 
     # ---- Créditos (ninguno negativo) ------------------------------------------
 

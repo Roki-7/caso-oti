@@ -6,7 +6,7 @@ Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@
 
 | Clase | Dato | Regla | Frase del caso |
 |---|---|---|---|
-| Todas las de `RegistroAcademico` | `nombre` | No vacío; máximo 200 (Curso), 36 (Plan), 100 (Escuela), 45 (Periodo) | «un nombre que debe validarse, aunque el tamaño máximo cambie» |
+| Todas las de `RegistroAcademico` | `nombre` | No vacío; máximo 200 (Curso), 36 (Plan), 45 (Periodo); Escuela: el caso no da el máximo (se usa 100) | «un nombre que debe validarse, aunque el tamaño máximo cambie» |
 | Curso | `creditos` | Mayor que 0, hasta 2 decimales | «siempre es mayor que cero y puede tener hasta dos decimales» |
 | Curso | `horas_teoricas`, `horas_practicas`, `horas_seminario`, `horas_virtuales` | Enteros de 0 a 255 | «ninguna de esas horas puede ser negativa ni pasar de 255» |
 | Seccion | `vacantes` | Entero mayor que 0 y no menor que `matriculados` | «vacantes mayor que cero», «no se puede reducir el número de vacantes por debajo de los que ya están matriculados» |
@@ -30,7 +30,6 @@ Todos los datos se guardan en atributos con prefijo `_` y se acceden mediante `@
 | PlanEstudios | `creditos_totales` | obligatorios + electivos + extracurriculares |
 | Seccion | `vacantes_disponibles` | vacantes − matriculados |
 | Persona | `nombre_completo` | nombres + « » + apellidos |
-| PeriodoAcademico | `codigo` | año + «-» + número en romanos (2026-II) |
 
 **Problema que evita:** la **inconsistencia por redundancia** (anomalía de actualización). Si un dato derivado se guarda aparte, cada vez que alguien corrige una de sus partes debe acordarse de actualizar también el total. Basta un olvido para que el total quede mal, que es exactamente lo que encontró la OTI: «planes de estudio cuyo total de créditos no coincidía con la suma de sus partes» y «cada vez que alguien corrige una hora y olvida actualizar el total, el dato queda mal». Al calcularlo en cada consulta, el total siempre coincide con sus partes porque no existe una copia que pueda desactualizarse.
 

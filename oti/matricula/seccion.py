@@ -81,13 +81,9 @@ class Seccion:
         """Se calcula en cada consulta."""
         return self.vacantes - self.matriculados
 
-    @property
-    def esta_llena(self) -> bool:
-        return self.vacantes_disponibles == 0
-
     def matricular(self) -> None:
         """Registra la matrícula de un estudiante. Rechaza si la sección está llena."""
-        if self.esta_llena:
+        if self.vacantes_disponibles == 0:
             raise ValueError(
                 f"La sección {self.codigo} está llena ({self.vacantes} vacantes ocupadas)."
             )
@@ -98,10 +94,3 @@ class Seccion:
         if self._matriculados == 0:
             raise ValueError(f"La sección {self.codigo} no tiene estudiantes para retirar.")
         self._matriculados -= 1
-
-    def __str__(self) -> str:
-        return (
-            f"[Sección] {self.codigo} - curso {self.codigo_curso}, periodo "
-            f"{self.codigo_periodo} | {self.matriculados}/{self.vacantes} matriculados, "
-            f"{self.vacantes_disponibles} disponibles"
-        )

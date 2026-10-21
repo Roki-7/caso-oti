@@ -74,10 +74,9 @@ Resultado: **72/72 comprobaciones correctas**. La salida completa está en [`sal
 | Decisión | Motivo |
 |---|---|
 | Nombre de la escuela: máximo 100 caracteres | El caso pide validar el nombre de todas, pero no da el límite de la escuela |
-| Id del curso con un contador | Ids legibles (1, 2, 3…) y fáciles de verificar en las pruebas |
+| Id del curso con un contador interno | El caso solo dice que «el sistema genera» el id; un contador da ids legibles (1, 2, 3…) |
 | `Decimal` para créditos y nota | Exactitud y conteo confiable de decimales |
 | Fecha de fin igual a la de inicio es válida | El caso solo prohíbe que sea **anterior** |
 | No se exige que la matrícula esté dentro del periodo | El caso no lo pide; se propone como mejora futura |
 | No se valida el formato del DNI ni del código del curso | El caso no lo pide; solo se exige texto no vacío |
-| El plan guarda `codigo_escuela` | «Cada escuela tiene planes de estudio» |
 | Una sección nueva empieza con 0 matriculados | Los matriculados solo cambian con `matricular()` y `retirar()` |
