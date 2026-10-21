@@ -50,6 +50,6 @@ Todos los datos se guardan en atributos **privados** con doble guion bajo (`__`)
 | `PlanEstudios.vigente` | `int` (0 o 1) en `__vigente` | `bool` |
 | `PlanEstudios.es_nuevo` | `int` (0 o 1) en `__es_nuevo` | `bool` |
 | `PeriodoAcademico.es_verano` | `int` (0 o 1) en `__es_verano` | `bool` |
-| `PeriodoAcademico.estado` | Llega como `int` (1–4) desde la base de datos | `EstadoPeriodo` (Enum) |
-
 El setter acepta tanto `True/False` como `0/1` (lo que llega de la base de datos) y siempre guarda el entero. El getter convierte a `bool`. De este modo se respeta el formato de la base de datos y quien consulta recibe una respuesta clara: «verdadero o falso».
+
+**Caso relacionado (`PeriodoAcademico.estado`):** el setter **recibe** el número `int` (1–4) que llega de la base de datos, pero lo **guarda y lo entrega** como `EstadoPeriodo` (Enum). Aquí la conversión ocurre al recibir el dato, no al entregarlo; se explica en la Actividad 3.3.

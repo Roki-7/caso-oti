@@ -23,11 +23,11 @@ class RegistroAcademico(ABC):
 
     @property
     def nombre(self) -> str:
-        return self._nombre
+        return self.__nombre
 
     @nombre.setter
     def nombre(self, valor: str) -> None:
-        self._nombre = validar_texto(valor, "El nombre", self.longitud_maxima_nombre)
+        self.__nombre = validar_texto(valor, "El nombre", self.longitud_maxima_nombre)
 ```
 
 La validación del nombre se escribe **una sola vez** en la clase base. Cada subclase solo indica su límite. Si mañana cambia la regla (por ejemplo, prohibir caracteres especiales), se modifica en un solo lugar.

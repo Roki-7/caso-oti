@@ -363,7 +363,8 @@ def probar_abstraccion() -> None:
     regla("R29", "Recorrer una lista mixta pidiendo un resumen, sin isinstance")
     registros = [curso_valido(), plan_valido(), escuela_valida(), periodo_valido()]
     for registro in registros:
-        aceptado(type(registro).__name__, registro.resumen)
+        # No se pregunta el tipo: cada registro responde con su propio resumen().
+        aceptado("resumen()", registro.resumen)
 
 
 # --------------------------------------------------------------------------- #

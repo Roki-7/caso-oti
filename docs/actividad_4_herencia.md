@@ -35,14 +35,16 @@ Todas son asociaciones. Por la restricción del encargo («por ahora se guarda s
 
 | Subclase | Hereda | Agrega | Redefine |
 |---|---|---|---|
-| `Curso` | `__nombre`, propiedad `nombre` con su validación | `id`, `codigo`, `creditos`, las 4 horas, `horas_totales` | `longitud_maxima_nombre` (200), `resumen()` |
-| `PlanEstudios` | `__nombre`, propiedad `nombre` | `anio_aprobacion`, `codigo_escuela`, los 3 créditos, `creditos_totales`, `vigente`, `es_nuevo` | `longitud_maxima_nombre` (36), `resumen()` |
-| `EscuelaProfesional` | `__nombre`, propiedad `nombre` | `codigo`, `informacion_general`, `perfil_egresado`, `codigo_director`, `codigo_secretario_academico` | `longitud_maxima_nombre` (valor asumido: 100), `resumen()` |
-| `PeriodoAcademico` | `__nombre`, propiedad `nombre` | `numero`, `anio`, las 4 fechas, `cambiar_fechas()`, `cambiar_fechas_matricula()`, `es_verano`, `nota_minima_aprobatoria`, `estado` | `longitud_maxima_nombre` (45), `resumen()` |
+| `Curso` | propiedad `nombre` con su validación | `id`, `codigo`, `creditos`, las 4 horas, `horas_totales` | `longitud_maxima_nombre` (200), `resumen()` |
+| `PlanEstudios` | propiedad `nombre` con su validación | `anio_aprobacion`, `codigo_escuela`, los 3 créditos, `creditos_totales`, `vigente`, `es_nuevo` | `longitud_maxima_nombre` (36), `resumen()` |
+| `EscuelaProfesional` | propiedad `nombre` con su validación | `codigo`, `informacion_general`, `perfil_egresado`, `codigo_director`, `codigo_secretario_academico` | `longitud_maxima_nombre` (valor asumido: 100), `resumen()` |
+| `PeriodoAcademico` | propiedad `nombre` con su validación | `numero`, `anio`, las 4 fechas, `cambiar_fechas()`, `cambiar_fechas_matricula()`, `es_verano`, `nota_minima_aprobatoria`, `estado` | `longitud_maxima_nombre` (45), `resumen()` |
 | `Estudiante` | `dni`, `nombres`, `apellidos`, `nombre_completo`, `__str__()` | `codigo_estudiante`, `codigo_escuela` | `rol` («Estudiante») |
 | `Docente` | `dni`, `nombres`, `apellidos`, `nombre_completo`, `__str__()` | `codigo_docente` | `rol` («Docente») |
 
 Todas las subclases llaman a `super().__init__(...)` para que la clase base inicialice y valide los datos comunes.
+
+**Sobre los atributos privados:** el atributo `__nombre` existe en cada objeto, pero pertenece a `RegistroAcademico`. Por el *name mangling*, Python lo guarda como `_RegistroAcademico__nombre`, así que una subclase no puede usar `self.__nombre` directamente. Lo que la subclase hereda y usa es la **propiedad** `nombre`, que pasa siempre por la validación. Lo mismo ocurre con `__dni`, `__nombres` y `__apellidos` en `Persona`.
 
 ## 4.3 Polimorfismo
 

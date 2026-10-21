@@ -22,7 +22,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 |---|---|
 | `__id` (int) | `id` (propiedad solo lectura) |
 | `__codigo` (str) | `codigo` (get/set) |
-| `__nombre` (str, heredado) | `creditos` (get/set: > 0, máx. 2 decimales) |
+| *(`nombre`: propiedad heredada)* | `creditos` (get/set: > 0, máx. 2 decimales) |
 | `__creditos` (Decimal) | `horas_teoricas`, `horas_practicas`, `horas_seminario`, `horas_virtuales` (get/set: 0–255) |
 | `__horas_teoricas` (int) | `horas_totales` (propiedad **calculada**) |
 | `__horas_practicas` (int) | `longitud_maxima_nombre` → 200 |
@@ -62,7 +62,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `__nombre` (str, heredado) | `anio_aprobacion`, `codigo_escuela` (get/set) |
+| *(`nombre`: propiedad heredada)* | `anio_aprobacion`, `codigo_escuela` (get/set) |
 | `__anio_aprobacion` (int) | `creditos_obligatorios`, `creditos_electivos`, `creditos_extracurriculares` (get/set: ≥ 0) |
 | `__creditos_obligatorios` (Decimal) | `creditos_totales` (propiedad **calculada**, sin setter) |
 | `__creditos_electivos` (Decimal) | `vigente`, `es_nuevo` (get/set: guardan int, devuelven bool) |
@@ -85,7 +85,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
 | `__codigo` (str) | `codigo`, `informacion_general`, `perfil_egresado` (get/set) |
-| `__nombre` (str, heredado) | `codigo_director`, `codigo_secretario_academico` (get/set) |
+| *(`nombre`: propiedad heredada)* | `codigo_director`, `codigo_secretario_academico` (get/set) |
 | `__informacion_general` (str) | `longitud_maxima_nombre` (el caso no da el número; se asume 100) |
 | `__perfil_egresado` (str) | `resumen()` |
 | `__codigo_director` (str) | |
@@ -102,7 +102,7 @@ Convención: clases en `PascalCase`; atributos, métodos y propiedades en `snake
 
 | Atributos (tipo) | Métodos y propiedades |
 |---|---|
-| `__nombre` (str, heredado) | `numero`, `anio` (get/set) |
+| *(`nombre`: propiedad heredada)* | `numero`, `anio` (get/set) |
 | `__numero` (int) | `fecha_inicio`, `fecha_fin`, `fecha_inicio_matricula`, `fecha_fin_matricula` (solo lectura) |
 | `__anio` (int) | `cambiar_fechas(inicio, fin)` |
 | `__fecha_inicio` (date) | `cambiar_fechas_matricula(inicio, fin)` |
