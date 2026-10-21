@@ -2,8 +2,8 @@
 
 from decimal import Decimal
 
-from oti.base.registro_academico import RegistroAcademico
-from oti.base.validaciones import validar_cadena, validar_decimal, validar_entero
+from registro_academico import RegistroAcademico
+from validaciones import validar_decimal, validar_entero
 
 
 class Curso(RegistroAcademico):
@@ -79,7 +79,7 @@ class Curso(RegistroAcademico):
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self.__codigo = validar_cadena(valor, "El código del curso")
+        self.__codigo = valor
 
     @property
     def creditos(self) -> Decimal:

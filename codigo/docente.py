@@ -1,7 +1,6 @@
 """Docente: es una Persona."""
 
-from oti.base.validaciones import validar_cadena
-from oti.personas.persona import Persona
+from persona import Persona
 
 
 class Docente(Persona):
@@ -21,4 +20,4 @@ class Docente(Persona):
 
     @codigo_docente.setter
     def codigo_docente(self, valor: str) -> None:
-        self.__codigo_docente = validar_cadena(valor, "El código de docente")
+        self.__codigo_docente = valor

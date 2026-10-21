@@ -5,28 +5,22 @@ Para cada regla del caso se muestra:
     2. un dato INVÁLIDO que el sistema rechaza, capturando el error con try/except.
 
 Ejecución (desde la carpeta raíz del proyecto):
-    python -m pruebas.programa_prueba
+    python codigo/programa_prueba.py
 """
 
 import sys
 from datetime import date
-from pathlib import Path
 
-# Permite ejecutar también con "python pruebas/programa_prueba.py".
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-from oti import (  # noqa: E402
-    Curso,
-    Docente,
-    EscuelaProfesional,
-    EstadoPeriodo,
-    Estudiante,
-    PeriodoAcademico,
-    Persona,
-    PlanEstudios,
-    RegistroAcademico,
-    Seccion,
-)
+from curso import Curso
+from docente import Docente
+from escuela_profesional import EscuelaProfesional
+from estado_periodo import EstadoPeriodo
+from estudiante import Estudiante
+from periodo_academico import PeriodoAcademico
+from persona import Persona
+from plan_estudios import PlanEstudios
+from registro_academico import RegistroAcademico
+from seccion import Seccion
 
 resultados = {"ok": 0, "fallo": 0}
 
@@ -332,6 +326,11 @@ def probar_personas() -> None:
     aceptado("rol del estudiante",
              lambda: Estudiante("70123456", "Ana", "Quispe", "2020100", "IS").rol)
     aceptado("rol del docente", lambda: Docente("40123456", "Luis", "Pérez", "DOC-001").rol)
+    personas = [Estudiante("70123456", "Ana Lucía", "Quispe Huamán", "2020100", "IS"),
+                Docente("40123456", "Luis Alberto", "Pérez Rojas", "DOC-001")]
+    for persona in personas:
+        # Sin preguntar el tipo: __str__ de Persona usa el rol de cada subclase.
+        aceptado("str(persona)", lambda: str(persona))
 
     class PersonaSinRol(Persona):  # subclase que olvida definir rol
         pass

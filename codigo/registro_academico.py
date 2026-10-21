@@ -9,7 +9,7 @@ Frase del caso que la origina:
 
 from abc import ABC, abstractmethod
 
-from oti.base.validaciones import validar_texto
+from validaciones import validar_texto
 
 
 class RegistroAcademico(ABC):

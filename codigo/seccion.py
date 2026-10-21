@@ -1,6 +1,6 @@
 """Sección de un curso abierta en un periodo."""
 
-from oti.base.validaciones import validar_cadena, validar_entero
+from validaciones import validar_entero
 
 
 class Seccion:
@@ -37,7 +37,7 @@ class Seccion:
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self.__codigo = validar_cadena(valor, "El código de la sección")
+        self.__codigo = valor
 
     @property
     def codigo_curso(self) -> str:
@@ -45,7 +45,7 @@ class Seccion:
 
     @codigo_curso.setter
     def codigo_curso(self, valor: str) -> None:
-        self.__codigo_curso = validar_cadena(valor, "El código del curso")
+        self.__codigo_curso = valor
 
     @property
     def codigo_periodo(self) -> str:
@@ -53,7 +53,7 @@ class Seccion:
 
     @codigo_periodo.setter
     def codigo_periodo(self, valor: str) -> None:
-        self.__codigo_periodo = validar_cadena(valor, "El código del periodo")
+        self.__codigo_periodo = valor
 
     # ---- Vacantes y matriculados ----------------------------------------------
 

@@ -1,7 +1,6 @@
 """Escuela profesional."""
 
-from oti.base.registro_academico import RegistroAcademico
-from oti.base.validaciones import validar_cadena
+from registro_academico import RegistroAcademico
 
 
 class EscuelaProfesional(RegistroAcademico):
@@ -56,7 +55,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo.setter
     def codigo(self, valor: str) -> None:
-        self.__codigo = validar_cadena(valor, "El código de la escuela")
+        self.__codigo = valor
 
     @property
     def informacion_general(self) -> str:
@@ -64,7 +63,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @informacion_general.setter
     def informacion_general(self, valor: str) -> None:
-        self.__informacion_general = validar_cadena(valor, "La información general")
+        self.__informacion_general = valor
 
     @property
     def perfil_egresado(self) -> str:
@@ -72,7 +71,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @perfil_egresado.setter
     def perfil_egresado(self, valor: str) -> None:
-        self.__perfil_egresado = validar_cadena(valor, "El perfil del egresado")
+        self.__perfil_egresado = valor
 
     @property
     def codigo_director(self) -> str:
@@ -80,7 +79,7 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo_director.setter
     def codigo_director(self, valor: str) -> None:
-        self.__codigo_director = validar_cadena(valor, "El código del director")
+        self.__codigo_director = valor
 
     @property
     def codigo_secretario_academico(self) -> str:
@@ -88,6 +87,4 @@ class EscuelaProfesional(RegistroAcademico):
 
     @codigo_secretario_academico.setter
     def codigo_secretario_academico(self, valor: str) -> None:
-        self.__codigo_secretario_academico = validar_cadena(
-            valor, "El código del secretario académico"
-        )
+        self.__codigo_secretario_academico = valor

@@ -1,7 +1,6 @@
 """Estudiante: es una Persona."""
 
-from oti.base.validaciones import validar_cadena
-from oti.personas.persona import Persona
+from persona import Persona
 
 
 class Estudiante(Persona):
@@ -30,7 +29,7 @@ class Estudiante(Persona):
 
     @codigo_estudiante.setter
     def codigo_estudiante(self, valor: str) -> None:
-        self.__codigo_estudiante = validar_cadena(valor, "El código de estudiante")
+        self.__codigo_estudiante = valor
 
     @property
     def codigo_escuela(self) -> str:
@@ -38,4 +37,4 @@ class Estudiante(Persona):
 
     @codigo_escuela.setter
     def codigo_escuela(self, valor: str) -> None:
-        self.__codigo_escuela = validar_cadena(valor, "El código de la escuela")
+        self.__codigo_escuela = valor

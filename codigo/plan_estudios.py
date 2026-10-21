@@ -2,13 +2,8 @@
 
 from decimal import Decimal
 
-from oti.base.registro_academico import RegistroAcademico
-from oti.base.validaciones import (
-    validar_bandera,
-    validar_decimal,
-    validar_cadena,
-    validar_entero,
-)
+from registro_academico import RegistroAcademico
+from validaciones import validar_bandera, validar_decimal
 
 
 class PlanEstudios(RegistroAcademico):
@@ -72,7 +67,7 @@ class PlanEstudios(RegistroAcademico):
 
     @anio_aprobacion.setter
     def anio_aprobacion(self, valor: int) -> None:
-        self.__anio_aprobacion = validar_entero(valor, "El año de aprobación")
+        self.__anio_aprobacion = valor
 
     @property
     def codigo_escuela(self) -> str:
@@ -80,7 +75,7 @@ class PlanEstudios(RegistroAcademico):
 
     @codigo_escuela.setter
     def codigo_escuela(self, valor: str) -> None:
-        self.__codigo_escuela = validar_cadena(valor, "El código de la escuela")
+        self.__codigo_escuela = valor
 
     # ---- Créditos (ninguno negativo) ------------------------------------------
 

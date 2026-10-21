@@ -3,17 +3,9 @@
 from datetime import date
 from decimal import Decimal
 
-from oti.base.registro_academico import RegistroAcademico
-from oti.base.validaciones import (
-    validar_bandera,
-    validar_decimal,
-    validar_entero,
-    validar_fecha,
-    validar_intervalo,
-)
-from oti.enums.estado_periodo import EstadoPeriodo
-
-_ROMANOS = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V"}
+from registro_academico import RegistroAcademico
+from estado_periodo import EstadoPeriodo
+from validaciones import validar_bandera, validar_decimal, validar_intervalo
 
 
 class PeriodoAcademico(RegistroAcademico):
@@ -65,8 +57,7 @@ class PeriodoAcademico(RegistroAcademico):
     def resumen(self) -> str:
         verano = " (verano)" if self.es_verano else ""
         return (
-            f"[Periodo académico] {self.anio}-{_ROMANOS.get(self.numero, self.numero)}"
-            f"{verano} - {self.nombre} | "
+            f"[Periodo académico] {self.nombre}{verano} | "
             f"{self.fecha_inicio} a {self.fecha_fin} | matrícula "
             f"{self.fecha_inicio_matricula} a {self.fecha_fin_matricula} | "
             f"nota mínima {self.nota_minima_aprobatoria} | estado {self.estado.name}"
@@ -80,7 +71,7 @@ class PeriodoAcademico(RegistroAcademico):
 
     @numero.setter
     def numero(self, valor: int) -> None:
-        self.__numero = validar_entero(valor, "El número del periodo")
+        self.__numero = valor
 
     @property
     def anio(self) -> int:
@@ -88,7 +79,7 @@ class PeriodoAcademico(RegistroAcademico):
 
     @anio.setter
     def anio(self, valor: int) -> None:
-        self.__anio = validar_entero(valor, "El año del periodo")
+        self.__anio = valor
 
     # ---- Fechas: solo lectura, se cambian de a dos ----------------------------
 
@@ -110,8 +101,6 @@ class PeriodoAcademico(RegistroAcademico):
 
     def cambiar_fechas(self, inicio: date, fin: date) -> None:
         """Cambia juntas las fechas del periodo, validando que fin >= inicio."""
-        inicio = validar_fecha(inicio, "La fecha de inicio del periodo")
-        fin = validar_fecha(fin, "La fecha de fin del periodo")
         validar_intervalo(inicio, fin, "periodo")
         # Se asignan solo después de validar ambas: el objeto nunca queda a medias.
         self.__fecha_inicio = inicio
@@ -119,8 +108,6 @@ class PeriodoAcademico(RegistroAcademico):
 
     def cambiar_fechas_matricula(self, inicio: date, fin: date) -> None:
         """Cambia juntas las fechas de matrícula, validando que fin >= inicio."""
-        inicio = validar_fecha(inicio, "La fecha de inicio de matrícula")
-        fin = validar_fecha(fin, "La fecha de fin de matrícula")
         validar_intervalo(inicio, fin, "intervalo de matrícula")
         self.__fecha_inicio_matricula = inicio
         self.__fecha_fin_matricula = fin
@@ -158,12 +145,7 @@ class PeriodoAcademico(RegistroAcademico):
 
     @estado.setter
     def estado(self, valor: EstadoPeriodo | int) -> None:
-        if isinstance(valor, EstadoPeriodo):
-            self.__estado = valor
-            return
-        # Acepta el número de la base de datos, pero solo si es 1, 2, 3 o 4.
-        if isinstance(valor, bool) or not isinstance(valor, int):
-            raise TypeError(f"El estado: debe ser un número entero, se recibió {valor!r}.")
+        # Acepta EstadoPeriodo o el número de la base de datos, solo si es 1, 2, 3 o 4.
         try:
             self.__estado = EstadoPeriodo(valor)
         except ValueError:
