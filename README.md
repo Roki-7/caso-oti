@@ -24,10 +24,6 @@ La OTI de la universidad usa una base de datos que guarda la información, pero 
 | `Persona` | Clase abstracta: exige un `rol` |
 | `Estudiante`, `Docente` | Heredan de `Persona` |
 
-## Diagrama de clases
-
-![Diagrama de clases UML](2_diagrama_uml/diagrama_clases.png)
-
 ## Ejecución
 
 Requiere Python 3.10 o superior. Desde la carpeta raíz:
